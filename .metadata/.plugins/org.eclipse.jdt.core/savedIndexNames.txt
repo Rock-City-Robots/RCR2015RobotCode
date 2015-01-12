@@ -1,0 +1,1 @@
+INDEX VERSION 1.127+C:\Users\andre_000\Documents\GitHub\RCR2015RobotCode\.metadata\.plugins\org.eclipse.jdt.core
