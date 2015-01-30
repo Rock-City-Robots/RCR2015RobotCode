@@ -2,9 +2,14 @@
 package org.usfirst.frc.team4849.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc.team4849.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4849.robot.subsystems.ExampleSubsystem;
 
@@ -19,6 +24,13 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	
+	public static SpeedController rightfront = new Talon(1);
+	public static SpeedController rightback = new Talon(2);
+	public static SpeedController leftback = new Talon(3);
+	public static SpeedController leftfront = new Talon(4);
+	
+	public static RobotDrive robotDrive = new RobotDrive(leftfront, leftback, rightfront, rightback);
 
     Command autonomousCommand;
 
@@ -68,6 +80,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	robotDrive.mecanumDrive_Cartesian(OI.a.getAxis(AxisType.kX), OI.a.getAxis(AxisType.kY), OI.a.getAxis(AxisType.kZ), 0);
         Scheduler.getInstance().run();
     }
     
