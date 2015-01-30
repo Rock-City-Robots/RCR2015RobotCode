@@ -25,10 +25,10 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	
-	public static SpeedController rightfront = new Talon(1);
-	public static SpeedController rightback = new Talon(2);
-	public static SpeedController leftback = new Talon(3);
-	public static SpeedController leftfront = new Talon(4);
+	public static SpeedController rightfront = new Talon(0);
+	public static SpeedController rightback = new Talon(1);
+	public static SpeedController leftback = new Talon(2);
+	public static SpeedController leftfront = new Talon(3);
 	
 	public static RobotDrive robotDrive = new RobotDrive(leftfront, leftback, rightfront, rightback);
 
