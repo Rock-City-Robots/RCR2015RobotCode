@@ -1,4 +1,8 @@
 build
 *~
-/RCR2015Code/bin/
-/.metadata/
+RCR2015Code/bin/
+RemoteSystemsTempFiles/
+.metadata/
+*.class
+*.jar
+.DS_Store
