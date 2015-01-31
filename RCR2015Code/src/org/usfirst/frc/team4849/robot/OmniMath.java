@@ -5,11 +5,6 @@ public class OmniMath {
 	private double b;
 	private double c;
 	private double d;
-	//0 <= angle < 360, 0 <= speed <= 1, 0 <= rotation <= 1
-	// a════════b
-	// ║        ║
-	// ║        ║
-	// c════════d
 	
 	public void translate(double angle, double speed, double rotation) {
 		a = speed * Math.cos(angle) + rotation;
