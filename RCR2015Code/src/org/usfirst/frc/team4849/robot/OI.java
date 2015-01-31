@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4849.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 import org.usfirst.frc.team4849.robot.commands.ExampleCommand;
@@ -38,6 +39,5 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public static Joystick a = new Joystick(1);
-	
 }
 

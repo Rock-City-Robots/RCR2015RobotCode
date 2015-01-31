@@ -1,12 +1,14 @@
 
 package org.usfirst.frc.team4849.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -30,6 +32,9 @@ public class Robot extends IterativeRobot {
 	public static SpeedController rightback = new Talon(1);
 	public static SpeedController leftback = new Talon(2);
 	public static SpeedController leftfront = new Talon(3);
+	
+	public static SpeedController roller1 = new Victor(4);
+	public static SpeedController roller2 = new Victor(5);
 	
 	public static RobotDrive robotDrive = new RobotDrive(leftfront, leftback, rightfront, rightback);
 
@@ -121,6 +126,13 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	robotDrive.mecanumDrive_Cartesian(curve(AxisType.kX, 3), curve(AxisType.kY, 3), curve(AxisType.kZ, 1), 0);
         Scheduler.getInstance().run();
+        if (oi.a.getTrigger()){
+        	roller1.set(1);
+        	roller2.set(1);
+        } else {
+        	roller1.set(0);
+        	roller2.set(0);
+        }
     }
     
     /**
