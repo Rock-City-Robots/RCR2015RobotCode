@@ -1,3 +1,4 @@
+TerminalPrefInvertColors=true
 eclipse.preferences.version=1
 org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=
 org.eclipse.jdt.core.classpathVariable.networktables=C\:/Users/andre_000/wpilib/java/current/lib/NetworkTables.jar
@@ -11,3 +12,4 @@ org.eclipse.jdt.core.compiler.compliance=1.8
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
 org.eclipse.jdt.core.compiler.source=1.8
+overriddenByCSS=,TerminalPrefInvertColors,

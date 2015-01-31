@@ -78,12 +78,48 @@ public class Robot extends IterativeRobot {
     public void disabledInit(){
 
     }
+    
+    private boolean safezone(double a) {
+    	return a < 0.1;
+    }
 
+    //This function alters the Joystick input
+    private double curve(AxisType a, int pow) {
+    	double b = OI.a.getAxis(a);
+    	double c = b * -1;
+    	if (b > c) {
+    		if (safezone(b))
+    			return 0;
+    		//[minFrom..maxFrom] -> [minTo..maxTo]
+    		//mappedValue = minTo + (maxTo - minTo) * ((value - minFrom) / (maxFrom - minFrom));
+    		b = 0.0 + (1.0 - 0.0) * ((b - 0.1) / (1 - 0.1));
+    		double o = b;
+    		do {
+    			o = o * b;
+    			pow = pow - 1;
+    		}while (pow != 0);
+    		return b;
+    	} else {
+    		if (safezone(c))
+    			return 0;
+    		c = 0.0 + (1.0 - 0.0) * ((c - 0.1) / (1 - 0.1));
+    		double o = c;
+    		do {
+    			o = o * c;
+    			pow = pow - 1;
+    		}while (pow != 0);
+    		b = c * -1;
+    		if (b > c)
+    			return c;
+    		return b;
+    	}
+    }
+    
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	robotDrive.mecanumDrive_Cartesian(OI.a.getAxis(AxisType.kX), OI.a.getAxis(AxisType.kY), OI.a.getAxis(AxisType.kZ), 0);
+    	robotDrive.mecanumDrive_Cartesian(curve(AxisType.kX, 3), curve(AxisType.kY, 3), curve(AxisType.kZ, 1), 0);
         Scheduler.getInstance().run();
     }
     
