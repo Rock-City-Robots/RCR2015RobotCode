@@ -3,6 +3,7 @@ package org.usfirst.frc.team4849.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
+import org.usfirst.frc.team4849.input.CubicJoystick;
 import org.usfirst.frc.team4849.robot.commands.ExampleCommand;
 
 /**
@@ -37,7 +38,7 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	public static Joystick a = new Joystick(1);
+	public static CubicJoystick a = new CubicJoystick(1);
 	
 }
 

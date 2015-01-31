@@ -43,8 +43,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
 		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        
     }
 	
 	public void disabledPeriodic() {
@@ -83,8 +82,11 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	robotDrive.mecanumDrive_Cartesian(OI.a.getAxis(AxisType.kX), OI.a.getAxis(AxisType.kY), OI.a.getAxis(AxisType.kZ), 0);
-        Scheduler.getInstance().run();
+    	double xValue = OI.a.getAxis(AxisType.kX);
+    	double yValue = OI.a.getAxis(AxisType.kY);
+    	double rotationValue= OI.a.getAxis(AxisType.kZ);
+    	robotDrive.mecanumDrive_Cartesian(xValue, yValue, rotationValue, 0);
+       // Scheduler.getInstance().run();
     }
     
     /**
