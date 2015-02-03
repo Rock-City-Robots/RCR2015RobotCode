@@ -2,6 +2,7 @@
 package org.usfirst.frc.team4849.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -13,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team4849.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4849.robot.commands.SimpleAutoCommand;
 import org.usfirst.frc.team4849.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -37,6 +38,7 @@ public class Robot extends IterativeRobot {
 	public static SpeedController roller2 = new Victor(5);
 	
 	public static RobotDrive robotDrive = new RobotDrive(leftfront, leftback, rightfront, rightback);
+	public static Gyro gyro = new Gyro(0);
 
     Command autonomousCommand;
 
@@ -49,7 +51,7 @@ public class Robot extends IterativeRobot {
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
 		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        autonomousCommand = new SimpleAutoCommand(robotDrive, gyro);
     }
 	
 	public void disabledPeriodic() {
@@ -124,7 +126,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	robotDrive.mecanumDrive_Cartesian(curve(AxisType.kX, 3), curve(AxisType.kY, 3), curve(AxisType.kZ, 1), 0);
+    	robotDrive.mecanumDrive_Cartesian(curve(AxisType.kX, 3), curve(AxisType.kY, 3), curve(AxisType.kZ, 1), gyro.getAngle());
         Scheduler.getInstance().run();
         if (oi.a.getTrigger()){
         	roller1.set(1);
