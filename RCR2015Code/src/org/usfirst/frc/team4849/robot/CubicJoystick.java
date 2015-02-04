@@ -18,7 +18,7 @@ public class CubicJoystick extends Joystick{
 
     //This function alters the Joystick input
     private double curve(AxisType a) {
-    	double b = OI.a.getAxis(a);
+    	double b = OI.joystick.getAxis(a);
     	double c = b * -1;
     	if (b > c) {
     		if (safezone(b))
