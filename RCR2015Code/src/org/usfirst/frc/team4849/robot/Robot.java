@@ -28,6 +28,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	// TODO: move all "magic numbers" to RobotMap
+	//TODO: move all motors and gyro to drivetrain subsystem
 
 	public static SpeedController rightfront = new Talon(0);
 	public static SpeedController rightback = new Talon(1);
