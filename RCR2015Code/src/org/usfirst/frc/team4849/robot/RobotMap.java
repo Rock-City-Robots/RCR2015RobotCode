@@ -30,5 +30,11 @@ public class RobotMap {
 	/*
 	 * USB PORTS 
 	 */
-	public static final int CUBIC_JOYSTICK = 1;
+	public static final int CUBIC_JOYSTICK = 0;
+	
+	/*
+	 * CANS
+	 */
+	public static final int LIFTER_RIGHT = 3;
+	public static final int LIFTER_LEFT = 4;
 }

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4849.robot.subsystems;
 
-import org.usfirst.frc.team4849.robot.DriveType;
 import org.usfirst.frc.team4849.robot.RobotMap;
+import org.usfirst.frc.team4849.robot.commands.DriveType;
 import org.usfirst.frc.team4849.robot.commands.DriveWithCubicJoystick;
 
 import edu.wpi.first.wpilibj.RobotDrive;
