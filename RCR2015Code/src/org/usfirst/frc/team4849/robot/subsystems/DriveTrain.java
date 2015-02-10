@@ -25,8 +25,6 @@ public class DriveTrain extends Subsystem {
 	private static double maxSpeed = 0.35;
 	
 	public DriveTrain() {
-		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
-		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
 		robotDrive.setMaxOutput(maxSpeed);
 		
 		setDefaultCommand(new DriveWithCubicJoystick(this));
@@ -34,12 +32,26 @@ public class DriveTrain extends Subsystem {
 	
 	public void drive(double x, double y, double z){
 		if(driveType == DriveType.ROBOT_ORIENTED) gyroAngle = 0.0;
-		else if(driveType == DriveType.FIELD_ORIENTED) {
-			gyroAngle = gyro.getAngle() + 180;
-			gyroAngle = gyroAngle % 360;
-		}
+		else if(driveType == DriveType.FIELD_ORIENTED) gyroAngle = gyroAngle % 360;
 		
+		setInvertedMotors(driveType);
 		robotDrive.mecanumDrive_Cartesian(x, y, z, gyroAngle);
+	}
+	
+	// Will set which motors to invert based on the drivetype
+	private void setInvertedMotors(DriveType driveType) {
+		boolean value = true;
+		
+		if(driveType == DriveType.ROBOT_ORIENTED) value = true;
+		else if(driveType == DriveType.FIELD_ORIENTED) value = false;
+		
+		robotDrive.setInvertedMotor(MotorType.kFrontRight, value);
+		robotDrive.setInvertedMotor(MotorType.kRearRight, value);
+		
+		robotDrive.setInvertedMotor(MotorType.kFrontLeft, !value);
+		robotDrive.setInvertedMotor(MotorType.kRearLeft, !value);
+		
+		
 	}
 	
 	public void setDriveType(DriveType driveType) {

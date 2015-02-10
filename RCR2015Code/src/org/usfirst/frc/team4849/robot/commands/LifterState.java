@@ -1,5 +1,5 @@
 package org.usfirst.frc.team4849.robot.commands;
 
 public enum LifterState {
-	TOP, BOTTOM, DRIVE
+	TOP, BOTTOM, STOP, DRIVE
 }

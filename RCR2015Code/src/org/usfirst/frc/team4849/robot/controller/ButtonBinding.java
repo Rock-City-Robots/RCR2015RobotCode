@@ -1,4 +1,4 @@
-package org.usfirst.frc.team4849.robot;
+package org.usfirst.frc.team4849.robot.controller;
 
 public enum ButtonBinding {
 	/*
@@ -9,7 +9,6 @@ public enum ButtonBinding {
 	/*
 	 * Lifter
 	 */
-	
 	LIFTERUP(7), 
 	LIFTERCARRY(9), 
 	LIFTERDOWN(11), 

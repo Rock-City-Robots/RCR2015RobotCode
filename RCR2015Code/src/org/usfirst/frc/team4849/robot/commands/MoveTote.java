@@ -29,7 +29,7 @@ public class MoveTote extends Command {
 				break;
 			case BOTTOM: lifter.down();
 				break;
-			case DRIVE: lifter.stop();
+			case STOP: lifter.stop();
 				break;
 		}
 
