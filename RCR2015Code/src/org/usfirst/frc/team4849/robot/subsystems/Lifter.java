@@ -6,6 +6,7 @@ import org.usfirst.frc.team4849.robot.commands.MoveTote;
 
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lifter extends Subsystem {
 	private static CANJaguar beltRight = new CANJaguar(RobotMap.LIFTER_RIGHT);
@@ -21,26 +22,23 @@ public class Lifter extends Subsystem {
 		beltRight.enableControl();
 		beltLeft.enableControl();
 		
-		setDefaultCommand(new MoveTote(this, LifterState.TOP));
-		
 	}
 	
 	public void up() {
-		beltRight.set(beltSpeed);
-		beltLeft.set(beltSpeed);
+		beltRight.set(-beltSpeed);
+		beltLeft.set(-beltSpeed);
 		
 	}
 	
 	public void down() {
-		beltRight.set(-beltSpeed);
-		beltLeft.set(-beltSpeed);
+		beltRight.set(beltSpeed);
+		beltLeft.set(beltSpeed);
 		
 	}
 	
 	public void stop() {
 		beltRight.set(0);
 		beltLeft.set(0);
-		
 	}
 	
 	@Override

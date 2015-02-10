@@ -3,10 +3,11 @@ package org.usfirst.frc.team4849.robot.commands;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveTote extends Command {
-	private static LifterState targetState;
-	Lifter lifter;
+	private LifterState targetState;
+	private Lifter lifter;
 	
 	public MoveTote(Lifter lifter, LifterState targetState) {
 		requires(lifter);
@@ -16,12 +17,13 @@ public class MoveTote extends Command {
 	
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
+		lifter.stop();
 
 	}
 
 	@Override
 	protected void execute() {
+		
 		switch(targetState) {
 			case TOP: lifter.up();
 				break;
@@ -41,7 +43,7 @@ public class MoveTote extends Command {
 
 	@Override
 	protected void interrupted() {
-		// TODO Auto-generated method stub
+		lifter.stop();
 
 	}
 

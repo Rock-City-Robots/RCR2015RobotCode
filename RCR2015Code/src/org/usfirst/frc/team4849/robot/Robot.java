@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4849.robot;
 
+import org.usfirst.frc.team4849.robot.commands.LifterState;
+import org.usfirst.frc.team4849.robot.commands.MoveTote;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
 
@@ -17,14 +19,21 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 	private DriveTrain driveTrain;
 	private Lifter lifter;
+	private OI oi;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
-		DriveTrain driveTrain = new DriveTrain();
+		driveTrain = new DriveTrain();
 		lifter = new Lifter();
+		oi = new OI();
+		
+		oi.createButton(ButtonBinding.LIFTERUP.getBindingID()).whenPressed(new MoveTote(lifter, LifterState.TOP));
+		oi.createButton(ButtonBinding.LIFTERCARRY.getBindingID()).whenPressed(new MoveTote(lifter, LifterState.DRIVE));
+		oi.createButton(ButtonBinding.LIFTERDOWN.getBindingID()).whenPressed(new MoveTote(lifter, LifterState.BOTTOM));
+		
 	}
 
 	public void disabledPeriodic() {
