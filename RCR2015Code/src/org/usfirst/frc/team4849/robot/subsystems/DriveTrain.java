@@ -34,9 +34,20 @@ public class DriveTrain extends Subsystem {
 	
 	public void drive(double x, double y, double z){
 		if(driveType == DriveType.ROBOT_ORIENTED) gyroAngle = 0.0;
-		else if(driveType == DriveType.FIELD_ORIENTED) gyroAngle = gyro.getAngle() % 360;
+		else if(driveType == DriveType.FIELD_ORIENTED) {
+			gyroAngle = gyro.getAngle() + 180;
+			gyroAngle = gyroAngle % 360;
+		}
 		
 		robotDrive.mecanumDrive_Cartesian(x, y, z, gyroAngle);
+	}
+	
+	public void setDriveType(DriveType driveType) {
+		this.driveType = driveType;
+	}
+	
+	public DriveType getDriveType() {
+		return driveType;
 	}
 	
 	@Override

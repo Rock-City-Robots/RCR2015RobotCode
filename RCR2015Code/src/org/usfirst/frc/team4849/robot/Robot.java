@@ -1,9 +1,13 @@
 package org.usfirst.frc.team4849.robot;
 
 import org.usfirst.frc.team4849.robot.commands.LifterState;
+import org.usfirst.frc.team4849.robot.commands.MoveRoller;
 import org.usfirst.frc.team4849.robot.commands.MoveTote;
+import org.usfirst.frc.team4849.robot.commands.RollerState;
+import org.usfirst.frc.team4849.robot.commands.ToggleDrivingMode;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
+import org.usfirst.frc.team4849.robot.subsystems.Roller;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -19,6 +23,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 	private DriveTrain driveTrain;
 	private Lifter lifter;
+	private Roller roller;
 	private OI oi;
 	
 	/**
@@ -28,11 +33,26 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		driveTrain = new DriveTrain();
 		lifter = new Lifter();
+		roller = new Roller();
 		oi = new OI();
 		
+		oi.createButton(ButtonBinding.DRIVEMODE.getBindingID()).whenPressed(new ToggleDrivingMode(driveTrain));
+		
 		oi.createButton(ButtonBinding.LIFTERUP.getBindingID()).whenPressed(new MoveTote(lifter, LifterState.TOP));
+		oi.getButton(ButtonBinding.LIFTERUP.getBindingID()).whenReleased(new MoveTote(lifter, LifterState.DRIVE));
+		
 		oi.createButton(ButtonBinding.LIFTERCARRY.getBindingID()).whenPressed(new MoveTote(lifter, LifterState.DRIVE));
+		
 		oi.createButton(ButtonBinding.LIFTERDOWN.getBindingID()).whenPressed(new MoveTote(lifter, LifterState.BOTTOM));
+		oi.getButton(ButtonBinding.LIFTERDOWN.getBindingID()).whenReleased(new MoveTote(lifter, LifterState.DRIVE));
+		
+		oi.createButton(ButtonBinding.ROLLERIN.getBindingID()).whenPressed(new MoveRoller(roller, RollerState.IN));
+		oi.getButton(ButtonBinding.ROLLERIN.getBindingID()).whenReleased(new MoveRoller(roller, RollerState.STOP));
+		
+		oi.createButton(ButtonBinding.ROLLEROUT.getBindingID()).whenPressed(new MoveRoller(roller, RollerState.OUT));
+		oi.getButton(ButtonBinding.ROLLEROUT.getBindingID()).whenReleased(new MoveRoller(roller, RollerState.STOP));
+		
+		oi.createButton(ButtonBinding.ROLLERSTOP.getBindingID()).whenPressed(new MoveRoller(roller, RollerState.STOP));
 		
 	}
 
