@@ -3,7 +3,6 @@ package org.usfirst.frc.team4849.robot.commands;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ToggleDrivingMode extends Command {
 	private DriveTrain driveTrain;
@@ -20,13 +19,8 @@ public class ToggleDrivingMode extends Command {
 
 	@Override
 	protected void execute() {
+		driveTrain.switchDriveType();
 		
-		switch (driveTrain.getDriveType()) {
-			case ROBOT_ORIENTED: driveTrain.setDriveType(DriveType.FIELD_ORIENTED);
-				break;
-			case FIELD_ORIENTED: driveTrain.setDriveType(DriveType.ROBOT_ORIENTED);
-				break;
-		}
 	}
 
 	@Override

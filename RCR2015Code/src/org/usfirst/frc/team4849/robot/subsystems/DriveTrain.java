@@ -27,40 +27,41 @@ public class DriveTrain extends Subsystem {
 	
 	public DriveTrain() {
 		robotDrive.setMaxOutput(maxSpeed);
+		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
+		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
 		
 		setDefaultCommand(new DriveWithCubicJoystick(this));
 	}
 	
 	public void drive(double x, double y, double z){
-		if(driveType == DriveType.ROBOT_ORIENTED) gyroAngle = 0.0;
-		else if(driveType == DriveType.FIELD_ORIENTED) {
-			//z = -z;
-			gyroAngle = gyro.getAngle();
-			gyroAngle = -gyroAngle % 360;
+		gyroAngle = gyro.getAngle();
+		
+		switch (driveType) {
+			case ROBOT_ORIENTED: gyroAngle = 0.0;
+				break;
+			case FIELD_ORIENTED: gyroAngle %= 360;
+				break;
 		}
 		
-		SmartDashboard.putString("Drive Type:", driveType.toString());
+		
 		SmartDashboard.putNumber("Gyro Value:", gyroAngle);
 		
-		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
-		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
-		
-		robotDrive.setInvertedMotor(MotorType.kFrontLeft, false);
-		robotDrive.setInvertedMotor(MotorType.kRearLeft, false);
-		
-		robotDrive.mecanumDrive_Cartesian(x, y, z, gyroAngle);
+		robotDrive.mecanumDrive_Cartesian(x, y, z, -gyroAngle);
 	}
 	
 	public void resetGyro() {
 		gyro.initGyro();
 	}
 	
-	public void setDriveType(DriveType driveType) {
-		this.driveType = driveType;
-	}
-	
-	public DriveType getDriveType() {
-		return driveType;
+	public void switchDriveType() {
+		switch (driveType) {
+			case ROBOT_ORIENTED: driveType = DriveType.FIELD_ORIENTED;
+				break;
+			case FIELD_ORIENTED: driveType = DriveType.ROBOT_ORIENTED;
+				break;
+		}
+		
+		SmartDashboard.putString("Drive Type:", driveType.toString());
 	}
 	
 	@Override

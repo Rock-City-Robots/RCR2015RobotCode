@@ -1,5 +1,14 @@
 package org.usfirst.frc.team4849.robot.controller;
 
+import org.usfirst.frc.team4849.robot.OI;
+import org.usfirst.frc.team4849.robot.Robot;
+import org.usfirst.frc.team4849.robot.commands.LifterState;
+import org.usfirst.frc.team4849.robot.commands.MoveRoller;
+import org.usfirst.frc.team4849.robot.commands.MoveTote;
+import org.usfirst.frc.team4849.robot.commands.ResetGyro;
+import org.usfirst.frc.team4849.robot.commands.RollerState;
+import org.usfirst.frc.team4849.robot.commands.ToggleDrivingMode;
+
 public class Extreme3D implements Controller {
 	/*
 	 * DriveTrain
@@ -18,39 +27,32 @@ public class Extreme3D implements Controller {
 	 */
 	private static final int TOTE_IN = 5;
 	private static final int TOTE_OUT = 3;
-	
-	public Extreme3D() {
-
-	}
 
 	@Override
-	public int getToggleDrivetype() {
-		return TOGGLE_DRIVETYPE;
-	}
-
-	@Override
-	public int getResetGyro() {
-		return RESET_GYRO;
-	}
-
-	@Override
-	public int getToteUp() {
-		return TOTE_UP;
-	}
-
-	@Override
-	public int getToteDown() {
-		return TOTE_DOWN;
-	}
-
-	@Override
-	public int getToteIn() {
-		return TOTE_IN;
-	}
-
-	@Override
-	public int getToteOut() {
-		return TOTE_OUT;
+	public void bindKeys(OI oi, Robot robot) {
+		/*
+		 * DriveTrain
+		 */
+		oi.createButton(TOGGLE_DRIVETYPE).whenPressed(new ToggleDrivingMode(robot.getDriveTrain()));
+		oi.createButton(RESET_GYRO).whenPressed(new ResetGyro(robot.getDriveTrain()));
+		
+		/*
+		 * Lifter
+		 */
+		oi.createButton(TOTE_UP).whenPressed(new MoveTote(robot.getLifter(), LifterState.TOP));
+		oi.getButton(TOTE_UP).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		
+		oi.createButton(TOTE_DOWN).whenPressed(new MoveTote(robot.getLifter(), LifterState.BOTTOM));
+		oi.getButton(TOTE_DOWN).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		
+		/*
+		 * Rollers
+		 */
+		oi.createButton(TOTE_IN).whenPressed(new MoveRoller(robot.getRoller(), RollerState.IN));
+		oi.getButton(TOTE_IN).whenReleased(new MoveRoller(robot.getRoller(), RollerState.STOP));
+		
+		oi.createButton(TOTE_OUT).whenPressed(new MoveRoller(robot.getRoller(), RollerState.OUT));
+		oi.getButton(TOTE_OUT).whenReleased(new MoveRoller(robot.getRoller(), RollerState.STOP));
 	}
 	
 }

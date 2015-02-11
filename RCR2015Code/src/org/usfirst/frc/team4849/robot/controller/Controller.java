@@ -1,22 +1,9 @@
 package org.usfirst.frc.team4849.robot.controller;
 
+import org.usfirst.frc.team4849.robot.OI;
+import org.usfirst.frc.team4849.robot.Robot;
+
 public interface Controller {
-	/*
-	 * DriveTrain
-	 */
-	public int getToggleDrivetype();
-	public int getResetGyro();
 	
-	/*
-	 * Lifter
-	 */
-	public int getToteUp();
-	public int getToteDown();
-	
-	/*
-	 * Roller
-	 */
-	public int getToteIn();
-	public int getToteOut();
-	
+	public void bindKeys(OI oi, Robot robot);
 }

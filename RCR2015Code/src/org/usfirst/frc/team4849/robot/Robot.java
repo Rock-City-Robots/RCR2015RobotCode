@@ -86,6 +86,10 @@ public class Robot extends IterativeRobot {
 		return roller;
 	}
 	
+	public OI getOI() {
+		return oi;
+	}
+	
 	
 	
 }

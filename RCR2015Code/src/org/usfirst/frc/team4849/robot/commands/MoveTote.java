@@ -5,7 +5,7 @@ import org.usfirst.frc.team4849.robot.subsystems.Lifter;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveTote extends Command {
-	private LifterState currentState, targetState;
+	private LifterState targetState;
 	private Lifter lifter;
 	
 	public MoveTote(Lifter lifter, LifterState targetState) {
@@ -36,8 +36,6 @@ public class MoveTote extends Command {
 			
 		}
 		
-		currentState = targetState;
-
 	}
 
 	@Override
