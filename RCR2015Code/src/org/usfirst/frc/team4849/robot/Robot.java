@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4849.robot;
 
+import org.usfirst.frc.team4849.robot.commands.Lights;
 import org.usfirst.frc.team4849.robot.controller.Extreme3D;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
@@ -21,6 +22,7 @@ public class Robot extends IterativeRobot {
 	private Lifter lifter;
 	private Roller roller;
 	private OI oi;
+	private Lights light;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -31,7 +33,7 @@ public class Robot extends IterativeRobot {
 		lifter = new Lifter();
 		roller = new Roller();
 		oi = new OI(this, new Extreme3D());
-		
+		light = new Lights();
 	}
 
 	public void disabledPeriodic() {
@@ -49,6 +51,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
+		light.start();
 	}
 
 	/**
