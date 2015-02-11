@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.usfirst.frc.team4849.robot.commands.LifterState;
 import org.usfirst.frc.team4849.robot.commands.MoveRoller;
 import org.usfirst.frc.team4849.robot.commands.MoveTote;
+import org.usfirst.frc.team4849.robot.commands.ResetGyro;
 import org.usfirst.frc.team4849.robot.commands.RollerState;
 import org.usfirst.frc.team4849.robot.commands.ToggleDrivingMode;
 import org.usfirst.frc.team4849.robot.controller.Controller;
@@ -20,31 +21,34 @@ public class OI {
 	public OI(Robot robot, Controller controller) {
 		this.robot = robot;
 		this.controller = controller;
+		
+		bindKeys();
 	}
 	
-	private void BindKeys() {
+	private void bindKeys() {
 		/*
 		 * DriveTrain
 		 */
-		getButton(Controller.TOGGLE_DRIVETYPE).whenPressed(new ToggleDrivingMode(robot.getDriveTrain()));
+		createButton(controller.getToggleDrivetype()).whenPressed(new ToggleDrivingMode(robot.getDriveTrain()));
+		createButton(controller.getResetGyro()).whenPressed(new ResetGyro(robot.getDriveTrain()));
 		
 		/*
 		 * Lifter
 		 */
-		getButton(Controller.TOTE_UP).whenPressed(new MoveTote(robot.getLifter(), LifterState.TOP));
-		getButton(Controller.TOTE_UP).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		createButton(controller.getToteUp()).whenPressed(new MoveTote(robot.getLifter(), LifterState.TOP));
+		getButton(controller.getToteUp()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
 		
-		getButton(Controller.TOTE_DOWN).whenPressed(new MoveTote(robot.getLifter(), LifterState.BOTTOM));
-		getButton(Controller.TOTE_DOWN).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		createButton(controller.getToteDown()).whenPressed(new MoveTote(robot.getLifter(), LifterState.BOTTOM));
+		getButton(controller.getToteDown()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
 		
 		/*
 		 * Rollers
 		 */
-		getButton(Controller.TOTE_IN).whenPressed(new MoveRoller(robot.getRoller(), RollerState.IN));
-		getButton(Controller.TOTE_IN).whenReleased(new MoveRoller(robot.getRoller(), RollerState.STOP));
+		createButton(controller.getToteIn()).whenPressed(new MoveRoller(robot.getRoller(), RollerState.IN));
+		getButton(controller.getToteIn()).whenReleased(new MoveRoller(robot.getRoller(), RollerState.STOP));
 		
-		getButton(Controller.TOTE_OUT).whenPressed(new MoveRoller(robot.getRoller(), RollerState.OUT));
-		getButton(Controller.TOTE_OUT).whenReleased(new MoveRoller(robot.getRoller(), RollerState.STOP));
+		createButton(controller.getToteOut()).whenPressed(new MoveRoller(robot.getRoller(), RollerState.OUT));
+		getButton(controller.getToteOut()).whenReleased(new MoveRoller(robot.getRoller(), RollerState.STOP));
 		
 	}
 	

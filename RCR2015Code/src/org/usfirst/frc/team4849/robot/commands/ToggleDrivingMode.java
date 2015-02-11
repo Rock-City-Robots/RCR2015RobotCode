@@ -9,6 +9,7 @@ public class ToggleDrivingMode extends Command {
 	private DriveTrain driveTrain;
 	
 	public ToggleDrivingMode(DriveTrain driveTrain) {
+		requires(driveTrain);
 		this.driveTrain = driveTrain;
 	}
 	
@@ -19,12 +20,11 @@ public class ToggleDrivingMode extends Command {
 
 	@Override
 	protected void execute() {
+		
 		switch (driveTrain.getDriveType()) {
 			case ROBOT_ORIENTED: driveTrain.setDriveType(DriveType.FIELD_ORIENTED);
-				SmartDashboard.putString("Field Oriented: ", DriveType.FIELD_ORIENTED.toString());
 				break;
 			case FIELD_ORIENTED: driveTrain.setDriveType(DriveType.ROBOT_ORIENTED);
-				SmartDashboard.putString("Robot Oriented: ", DriveType.ROBOT_ORIENTED.toString());
 				break;
 		}
 	}

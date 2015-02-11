@@ -10,7 +10,7 @@ public class Roller extends Subsystem {
 	private static final SpeedController rollerRight = new Victor(RobotMap.ROLLER_RIGHT);
 	private static final SpeedController rollerLeft = new Victor(RobotMap.ROLLER_LEFT);
 	
-	private double rollerSpeed = 0.95;
+	private double rollerSpeed = 1;
 	
 	public void in() {
 		rollerRight.set(-rollerSpeed);

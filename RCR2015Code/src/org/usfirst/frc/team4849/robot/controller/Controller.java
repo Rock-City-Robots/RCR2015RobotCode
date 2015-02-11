@@ -1,20 +1,22 @@
 package org.usfirst.frc.team4849.robot.controller;
 
-public class Controller {
+public interface Controller {
 	/*
 	 * DriveTrain
 	 */
-	public static int TOGGLE_DRIVETYPE;
+	public int getToggleDrivetype();
+	public int getResetGyro();
 	
 	/*
 	 * Lifter
 	 */
-	public static int TOTE_UP;
-	public static int TOTE_DOWN;
+	public int getToteUp();
+	public int getToteDown();
 	
 	/*
 	 * Roller
 	 */
-	public static int TOTE_IN;
-	public static int TOTE_OUT;
+	public int getToteIn();
+	public int getToteOut();
+	
 }

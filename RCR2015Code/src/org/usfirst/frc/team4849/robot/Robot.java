@@ -1,11 +1,5 @@
 package org.usfirst.frc.team4849.robot;
 
-import org.usfirst.frc.team4849.robot.commands.LifterState;
-import org.usfirst.frc.team4849.robot.commands.MoveRoller;
-import org.usfirst.frc.team4849.robot.commands.MoveTote;
-import org.usfirst.frc.team4849.robot.commands.RollerState;
-import org.usfirst.frc.team4849.robot.commands.ToggleDrivingMode;
-import org.usfirst.frc.team4849.robot.controller.ButtonBinding;
 import org.usfirst.frc.team4849.robot.controller.Extreme3D;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;

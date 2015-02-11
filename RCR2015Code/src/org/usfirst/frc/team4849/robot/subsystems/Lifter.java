@@ -12,7 +12,7 @@ public class Lifter extends Subsystem {
 	private static CANJaguar beltRight = new CANJaguar(RobotMap.LIFTER_RIGHT);
 	private static CANJaguar beltLeft = new CANJaguar(RobotMap.LIFTER_LEFT);
 	
-	private static double beltSpeed = 0.35;
+	private static double beltSpeed = 0.2;
 	
 	public Lifter() {
 		beltRight.setPercentMode();
@@ -23,15 +23,19 @@ public class Lifter extends Subsystem {
 		
 	}
 	
-	public void up() {
+	public void toteUp() {
 		beltRight.set(beltSpeed);
 		beltLeft.set(beltSpeed);
 		
 	}
 	
-	public void down() {
+	public void toteDown() {
 		beltRight.set(-beltSpeed);
 		beltLeft.set(-beltSpeed);
+		
+	}
+	
+	public void drive() {
 		
 	}
 	

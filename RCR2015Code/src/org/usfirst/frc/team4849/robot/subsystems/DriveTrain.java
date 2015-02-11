@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
 	private static SpeedController rightFront = new Talon(RobotMap.WHEEL_RIGHT_FRONT);
@@ -22,7 +23,7 @@ public class DriveTrain extends Subsystem {
 	private static Gyro gyro = new Gyro(RobotMap.GYRO);
 	
 	private static double gyroAngle;
-	private static double maxSpeed = 0.35;
+	private static double maxSpeed = 0.5;
 	
 	public DriveTrain() {
 		robotDrive.setMaxOutput(maxSpeed);
@@ -32,26 +33,26 @@ public class DriveTrain extends Subsystem {
 	
 	public void drive(double x, double y, double z){
 		if(driveType == DriveType.ROBOT_ORIENTED) gyroAngle = 0.0;
-		else if(driveType == DriveType.FIELD_ORIENTED) gyroAngle = gyroAngle % 360;
+		else if(driveType == DriveType.FIELD_ORIENTED) {
+			//z = -z;
+			gyroAngle = gyro.getAngle();
+			gyroAngle = -gyroAngle % 360;
+		}
 		
-		setInvertedMotors(driveType);
+		SmartDashboard.putString("Drive Type:", driveType.toString());
+		SmartDashboard.putNumber("Gyro Value:", gyroAngle);
+		
+		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
+		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
+		
+		robotDrive.setInvertedMotor(MotorType.kFrontLeft, false);
+		robotDrive.setInvertedMotor(MotorType.kRearLeft, false);
+		
 		robotDrive.mecanumDrive_Cartesian(x, y, z, gyroAngle);
 	}
 	
-	// Will set which motors to invert based on the drivetype
-	private void setInvertedMotors(DriveType driveType) {
-		boolean value = true;
-		
-		if(driveType == DriveType.ROBOT_ORIENTED) value = true;
-		else if(driveType == DriveType.FIELD_ORIENTED) value = false;
-		
-		robotDrive.setInvertedMotor(MotorType.kFrontRight, value);
-		robotDrive.setInvertedMotor(MotorType.kRearRight, value);
-		
-		robotDrive.setInvertedMotor(MotorType.kFrontLeft, !value);
-		robotDrive.setInvertedMotor(MotorType.kRearLeft, !value);
-		
-		
+	public void resetGyro() {
+		gyro.initGyro();
 	}
 	
 	public void setDriveType(DriveType driveType) {
