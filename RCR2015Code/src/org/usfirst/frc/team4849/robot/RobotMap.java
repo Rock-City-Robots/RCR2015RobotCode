@@ -21,6 +21,11 @@ public class RobotMap {
 	/*
 	 * DIGITAL I/O
 	 */
+	public static final int SWITCH_RIGHT_BOTTOM = 0;
+	public static final int SWITCH_RIGHT_TOP = 1;
+	public static final int SWITCH_LEFT_BOTTOM = 2;
+	public static final int SWITCH_LEFT_TOP = 3;
+	
 	
 	/*
 	 * ANALOG I/0
@@ -35,8 +40,8 @@ public class RobotMap {
 	/*
 	 * CANS
 	 */
-	public static final int LIFTER_RIGHT = 3;
-	public static final int LIFTER_LEFT = 4;
+	public static final int BELT_RIGHT = 3;
+	public static final int BELT_LEFT = 4;
 	
 	/*
 	 * LIGHTS

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveTote extends Command {
 	private LifterState targetState;
 	private Lifter lifter;
+	private boolean finished = false;
 	
 	public MoveTote(Lifter lifter, LifterState targetState) {
 		requires(lifter);
@@ -14,27 +15,32 @@ public class MoveTote extends Command {
 		this.targetState = targetState;
 		
 	}
-	
-	@Override
-	protected void end() {
-		lifter.stop();
-
-	}
 
 	@Override
 	protected void execute() {
-		
-		switch(targetState) {
-			case TOP: lifter.toteUp();
-				break;
-			case BOTTOM: lifter.toteDown();
-				break;
-			case DRIVE: lifter.drive();
-				break;
-			case STOP: lifter.stop();
-				break;
-			
+		if(targetState == LifterState.TOP) {
+			if(!lifter.isTop()) {
+				finished = false;
+				lifter.toteUp();
+			}
+			else {
+				finished = true;
+				lifter.resetState();
+				end();
+			}
 		}
+		else if(targetState == LifterState.BOTTOM) {
+			if(!lifter.isBottom()) {
+				finished = false;
+				lifter.toteDown();
+			}
+			else {
+				finished = true;
+				lifter.resetState();
+				end();
+			}
+		}
+
 		
 	}
 
@@ -48,10 +54,16 @@ public class MoveTote extends Command {
 		lifter.stop();
 
 	}
+	
+	@Override
+	protected void end() {
+		lifter.stop();
+		lifter.resetState();
+	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return finished;
 	}
 
 }

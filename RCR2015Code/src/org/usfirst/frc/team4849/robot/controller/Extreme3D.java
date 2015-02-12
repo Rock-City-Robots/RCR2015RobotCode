@@ -48,10 +48,10 @@ public class Extreme3D extends Controller {
 		 * Lifter
 		 */
 		createButton(getToteUp()).whenPressed(new MoveTote(robot.getLifter(), LifterState.TOP));
-		getButton(getToteUp()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		//getButton(getToteUp()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
 		
 		createButton(getToteDown()).whenPressed(new MoveTote(robot.getLifter(), LifterState.BOTTOM));
-		getButton(getToteDown()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		//getButton(getToteDown()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
 		
 		/*
 		 * Rollers
