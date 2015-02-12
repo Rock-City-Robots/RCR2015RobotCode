@@ -13,7 +13,6 @@ public class Light extends Command{
 	
 	@Override
 	protected void initialize() {
-		light = new Lights(0, 1, 200);
 	}
 
 	@Override

@@ -15,13 +15,11 @@ public class Lights extends Subsystem {
 	double percent;
 	int incrementValue;
 	AnalogOutput lighta;
-	AnalogOutput lightb;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	public Lights(int a, int b, int incV) {
+	public Lights(int a, int incV) {
 		lighta = new AnalogOutput(a);
-		lightb = new AnalogOutput(b);
 		incrementValue = incV;
 		increment = 0;
 		direction = 0;
@@ -30,7 +28,6 @@ public class Lights extends Subsystem {
 	
 	public void end() {
 		lighta.setVoltage(5.0);
-		lightb.setVoltage(5.0);
 	}
 	
 	public void Light() {
@@ -45,7 +42,6 @@ public class Lights extends Subsystem {
 		voltage = 5 - voltage;
 		voltage = voltage * percent;
 		lighta.setVoltage(5.0 - voltage);
-		lightb.setVoltage(5.0 - voltage);
 	}
 	
     public void initDefaultCommand() {

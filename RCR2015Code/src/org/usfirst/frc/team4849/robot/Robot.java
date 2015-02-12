@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
 		lifter = new Lifter();
 		roller = new Roller();
 		oi = new OI(this, new Extreme3D());
-		light = new Lights(0, 1, 200);
+		light = new Lights(1, 200);
 	}
 
 	public void disabledPeriodic() {
