@@ -41,7 +41,7 @@ public class Lights extends Subsystem {
 			direction = direction * -1;
 		increment = increment + direction;
 		voltage = voltage - 8;
-		percent = increment / 200;
+		percent = increment / incrementValue;
 		voltage = 5 - voltage;
 		voltage = voltage * percent;
 		lighta.setVoltage(5.0 - voltage);
