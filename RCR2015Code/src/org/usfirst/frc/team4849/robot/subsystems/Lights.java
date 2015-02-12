@@ -51,6 +51,7 @@ public class Lights extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new org.usfirst.frc.team4849.robot.commands.Light());
     }
 }
 

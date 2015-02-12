@@ -1,9 +1,9 @@
 package org.usfirst.frc.team4849.robot;
 
-import org.usfirst.frc.team4849.robot.commands.Lights;
 import org.usfirst.frc.team4849.robot.controller.Extreme3D;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
+import org.usfirst.frc.team4849.robot.subsystems.Lights;
 import org.usfirst.frc.team4849.robot.subsystems.Roller;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
 		lifter = new Lifter();
 		roller = new Roller();
 		oi = new OI(this, new Extreme3D());
-		light = new Lights();
+		light = new Lights(0, 1, 200);
 	}
 
 	public void disabledPeriodic() {
@@ -51,7 +51,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-		light.start();
 	}
 
 	/**
