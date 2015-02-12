@@ -1,9 +1,10 @@
 package org.usfirst.frc.team4849.robot;
 
+import org.usfirst.frc.team4849.robot.controller.Controller;
 import org.usfirst.frc.team4849.robot.controller.Extreme3D;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
-import org.usfirst.frc.team4849.robot.subsystems.Lights;
+import org.usfirst.frc.team4849.robot.subsystems.Light;
 import org.usfirst.frc.team4849.robot.subsystems.Roller;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -21,8 +22,8 @@ public class Robot extends IterativeRobot {
 	private DriveTrain driveTrain;
 	private Lifter lifter;
 	private Roller roller;
-	private OI oi;
-	private Lights light;
+	private Controller controller;
+	private Light light;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -32,8 +33,8 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		lifter = new Lifter();
 		roller = new Roller();
-		oi = new OI(this, new Extreme3D());
-		light = new Lights(1, 200);
+		light = new Light();
+		controller = new Extreme3D(this);
 	}
 
 	public void disabledPeriodic() {
@@ -88,10 +89,8 @@ public class Robot extends IterativeRobot {
 		return roller;
 	}
 	
-	public OI getOI() {
-		return oi;
+	public Light getLights() {
+		return light;
 	}
-	
-	
 	
 }

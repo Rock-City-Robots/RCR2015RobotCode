@@ -1,15 +1,18 @@
 package org.usfirst.frc.team4849.robot.commands;
 
-import org.usfirst.frc.team4849.robot.subsystems.Lights;
+import org.usfirst.frc.team4849.robot.subsystems.Light;
 
-import edu.wpi.first.wpilibj.AnalogOutput;
-import edu.wpi.first.wpilibj.ControllerPower;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Light extends Command{
+public class PulseBattery extends Command{
 
 	
-	private Lights light;
+	private Light light;
+	
+	public PulseBattery(Light light) {
+		requires(light);
+		this.light = light;
+	}
 	
 	@Override
 	protected void initialize() {
@@ -17,12 +20,11 @@ public class Light extends Command{
 
 	@Override
 	protected void execute() {
-		light.Light();
+		light.pulse();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
