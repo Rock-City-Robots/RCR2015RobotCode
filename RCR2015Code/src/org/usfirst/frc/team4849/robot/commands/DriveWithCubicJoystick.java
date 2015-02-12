@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveWithCubicJoystick extends Command{
 	private DriveTrain driveTrain;
 	private CubicJoystick controller;
-	private static int arc = 5;
+	private static int arc = 3;
 	
 	public DriveWithCubicJoystick(DriveTrain driveTrain) {
 		requires(driveTrain);

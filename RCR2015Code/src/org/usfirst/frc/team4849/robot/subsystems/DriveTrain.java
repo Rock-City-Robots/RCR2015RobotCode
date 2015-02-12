@@ -23,7 +23,7 @@ public class DriveTrain extends Subsystem {
 	private static Gyro gyro = new Gyro(RobotMap.GYRO);
 	
 	private static double gyroAngle;
-	private static double maxSpeed = 0.5;
+	private static double maxSpeed = 0.3;
 	
 	public DriveTrain() {
 		robotDrive.setMaxOutput(maxSpeed);
