@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.ControllerPower;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Light extends Subsystem {
-	private int increment = 0;
+	private int increment = 1;
 	private int direction = 1;
-	private int incrementValue = 200;
+	private int incrementValue = 1000;
 	private double maxVoltage = 5.0;
 	private double voltage, voltageOld, percent;
 	
@@ -36,10 +36,12 @@ public class Light extends Subsystem {
 		increment = increment + direction;
 		voltage = voltage - 8;
 		percent = increment / incrementValue;
-		voltage = 5 - voltage;
+		//maxVoltage = EncoderArray.getValue();
+		voltage = maxVoltage - voltage;
 		voltage = voltage * percent;
 		
 		light.setVoltage(maxVoltage - voltage);
+		maxVoltage= 5.0;
 	}
 	
     public void initDefaultCommand() {
