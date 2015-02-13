@@ -12,9 +12,11 @@ public class Light extends Subsystem {
 	private int increment = 1;
 	private int direction = 1;
 	private int incrementValue = 1000;
+	
 	private double maxVoltage = 5.0;
 	private double xSpeed = 0;
 	private double ySpeed = 0;
+	
 	private double voltage, voltageOld, percent, speed;
 	
 	private AnalogOutput light = new AnalogOutput(RobotMap.LIGHTS_BATTERY);
@@ -47,7 +49,6 @@ public class Light extends Subsystem {
 		else if(voltage > maxVoltage) voltage = maxVoltage;
 		
 		percent = increment / incrementValue;
-		//maxVoltage = EncoderArray.getValue();
 		voltage = maxVoltage - voltage;
 		voltage = voltage * percent;
 		

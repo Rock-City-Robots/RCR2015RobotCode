@@ -2,7 +2,6 @@ package org.usfirst.frc.team4849.robot.controller;
 
 import java.util.HashMap;
 
-import org.usfirst.frc.team4849.robot.CubicJoystick;
 import org.usfirst.frc.team4849.robot.Robot;
 import org.usfirst.frc.team4849.robot.RobotMap;
 import org.usfirst.frc.team4849.robot.commands.LifterState;
@@ -22,30 +21,24 @@ public abstract class Controller {
 	/*
 	 * DriveTrain
 	 */
-	private static int TOGGLE_DRIVETYPE;
-	private static int RESET_GYRO;
+	public static int TOGGLE_DRIVETYPE;
+	public static int RESET_GYRO;
 	
 	/*
 	 * Lifter
 	 */
-	private static int TOTE_UP;
-	private static int TOTE_DOWN;
-	private static int RESET_TOTE_COUNT;
+	public static int TOTE_UP;
+	public static int TOTE_DOWN;
+	public static int RESET_TOTE_COUNT;
 	
 	/*
 	 * Rollers
 	 */
-	private static int TOTE_IN;
-	private static int TOTE_OUT;
+	public static int TOTE_IN;
+	public static int TOTE_OUT;
 	
-	public Controller(int TOGGLE_DRIVETYPE, int RESET_GYRO, int TOTE_UP, int TOTE_DOWN, int RESET_TOTE_COUNT, int TOTE_IN, int TOTE_OUT) {
-		this.TOGGLE_DRIVETYPE = TOGGLE_DRIVETYPE;
-		this.RESET_GYRO = RESET_GYRO;
-		this.TOTE_UP = TOTE_UP;
-		this.TOTE_DOWN = TOTE_DOWN;
-		this.RESET_TOTE_COUNT = RESET_TOTE_COUNT;
-		this.TOTE_IN = TOTE_IN;
-		this.TOTE_OUT = TOTE_OUT;
+	public Controller() {
+		
 	
 	}
 	
@@ -68,34 +61,6 @@ public abstract class Controller {
 	
 	public static Joystick getController() {
 		return controller;
-	}
-
-	public static int getToggleDriveType() {
-		return TOGGLE_DRIVETYPE;
-	}
-
-	public static int getResetGyro() {
-		return RESET_GYRO;
-	}
-
-	public static int getToteUp() {
-		return TOTE_UP;
-	}
-
-	public static int getToteDown() {
-		return TOTE_DOWN;
-	}
-	
-	public static int getResetToteCount() {
-		return RESET_TOTE_COUNT;
-	}
-
-	public static int getToteIn() {
-		return TOTE_IN;
-	}
-
-	public static int getToteOut() {
-		return TOTE_OUT;
 	}
 	
 }

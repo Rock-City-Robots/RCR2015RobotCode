@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4849.robot.commands;
 
-import org.usfirst.frc.team4849.robot.CubicJoystick;
 import org.usfirst.frc.team4849.robot.controller.Controller;
+import org.usfirst.frc.team4849.robot.controller.CubicJoystick;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.Joystick.AxisType;

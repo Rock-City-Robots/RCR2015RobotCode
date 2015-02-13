@@ -1,5 +1,6 @@
-package org.usfirst.frc.team4849.robot;
+package org.usfirst.frc.team4849.robot.controller;
 
+import org.usfirst.frc.team4849.robot.Robot;
 import org.usfirst.frc.team4849.robot.subsystems.Light;
 
 import edu.wpi.first.wpilibj.Joystick;
