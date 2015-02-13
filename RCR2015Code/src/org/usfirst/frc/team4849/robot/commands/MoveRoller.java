@@ -36,7 +36,6 @@ public class MoveRoller extends Command {
 
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -48,7 +47,6 @@ public class MoveRoller extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

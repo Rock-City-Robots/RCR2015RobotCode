@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Light extends Subsystem {
 	private int increment = 0;
 	private int direction = 1;
-	private int incrementValue = 200;
+	private int incrementValue = 1000;
 	private double maxVoltage = 5.0;
 	private double voltage, voltageOld, percent;
 	

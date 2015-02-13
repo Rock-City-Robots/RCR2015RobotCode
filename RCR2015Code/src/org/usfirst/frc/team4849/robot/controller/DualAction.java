@@ -33,6 +33,8 @@ public class DualAction extends Controller {
 	public DualAction(Robot robot) {
 		super(TOGGLE_DRIVETYPE, RESET_GYRO, TOTE_UP, TOTE_DOWN, TOTE_IN, TOTE_OUT);
 		this.robot = robot;
+		
+		bindKeys();
 	}
 	
 	@Override
@@ -47,10 +49,10 @@ public class DualAction extends Controller {
 		 * Lifter
 		 */
 		createButton(getToteUp()).whenPressed(new MoveTote(robot.getLifter(), LifterState.TOP));
-		getButton(getToteUp()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		//getButton(getToteUp()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
 		
 		createButton(getToteDown()).whenPressed(new MoveTote(robot.getLifter(), LifterState.BOTTOM));
-		getButton(getToteDown()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		//getButton(getToteDown()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
 		
 		/*
 		 * Rollers
