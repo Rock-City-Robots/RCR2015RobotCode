@@ -40,8 +40,8 @@ public class RobotMap {
 	/*
 	 * CANS
 	 */
-	public static final int BELT_RIGHT = 3;
-	public static final int BELT_LEFT = 4;
+	public static final int BELT_LEFT = 3;
+	public static final int BELT_RIGHT = 4;
 	
 	/*
 	 * LIGHTS

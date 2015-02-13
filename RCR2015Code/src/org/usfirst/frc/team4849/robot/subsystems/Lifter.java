@@ -17,12 +17,13 @@ public class Lifter extends Subsystem {
 	private static DigitalInput switchLeftBottom = new DigitalInput(RobotMap.SWITCH_LEFT_BOTTOM);
 	private static DigitalInput switchLeftTop = new DigitalInput(RobotMap.SWITCH_LEFT_TOP);
 	
-	private LifterState currentState = LifterState.STOP;
+	private static LifterState currentState = LifterState.BOTTOM;
 	
 	private static boolean beltLeftFinished = false;
 	private static boolean beltRightFinished = false;
 	
-	private static double beltSpeed = 0.15;
+	private static double beltSpeed = 0.25;
+	private static int toteCount = 0;
 	
 	public Lifter() {
 		beltRight.setPercentMode();
@@ -37,22 +38,27 @@ public class Lifter extends Subsystem {
 		// If the selected belt is not at the top start moving the belt upwards
 		// If it is at the top stop the belt and indicate which belt is finished
 		
-		if(!switchRightTop.get()) beltRight.set(beltSpeed);
-		else {
-			beltLeft.set(0);
+		if(!switchRightTop.get()) {
+			beltRight.set(beltSpeed);
+		}else {
+			beltRight.set(0);
 			beltRightFinished = true;
 		}
 		
-		if(!switchLeftTop.get()) beltLeft.set(beltSpeed);
-		else {
-			beltRight.set(0);
+		if(!switchLeftTop.get()){ 
+			beltLeft.set(beltSpeed);
+		}else {
+			beltLeft.set(0);
 			beltLeftFinished = true;
 		}
 		
 		// If both of the belts are at the top indicate that the entire lifter position is at the top and done
 		
-		if(beltRightFinished && beltLeftFinished) currentState = LifterState.TOP;
-		else currentState = LifterState.STOP;
+		if(beltRightFinished && beltLeftFinished) {
+			currentState = LifterState.TOP;
+			toteCount += 1;
+		}
+		else currentState = LifterState.MOVE;
 		
 	}
 	
@@ -60,18 +66,21 @@ public class Lifter extends Subsystem {
 		
 		if(!switchRightBottom.get()) beltRight.set(-beltSpeed);
 		else {
-			beltLeft.set(0);
+			beltRight.set(0);
 			beltRightFinished = true;
 		}
 		
 		if(!switchLeftBottom.get()) beltLeft.set(-beltSpeed);
 		else {
-			beltRight.set(0);
+			beltLeft.set(0);
 			beltLeftFinished = true;
 		}
 		
-		if(beltRightFinished && beltLeftFinished) currentState = LifterState.BOTTOM;
-		else currentState = LifterState.STOP;
+		if(beltRightFinished && beltLeftFinished) {
+			currentState = LifterState.BOTTOM;
+			toteCount += 1;
+		}
+		else currentState = LifterState.MOVE;
 		
 	}
 	
@@ -79,27 +88,38 @@ public class Lifter extends Subsystem {
 		
 	}
 	
+	public static int getToteCount() {
+		return toteCount;
+	}
+	
+	public static void resetToteCount() {
+		toteCount = 0;
+	}
+	
 	public LifterState getCurrentState() {
 		return currentState;
 	}
 	
+	public void setCurrentState(LifterState state) {
+		currentState = state;
+	}
+	
 	public void resetLifter() {
-		currentState = LifterState.STOP;
+		beltRight.set(0);
+		beltLeft.set(0);
 		
 		beltRightFinished = false;
 		beltLeftFinished = false;
 		
-		beltRight.set(0);
-		beltLeft.set(0);
-		
 	}
 	
 	public void outputSwitchs() {
-		SmartDashboard.putBoolean("Right Top:", switchRightTop.get());
-		SmartDashboard.putBoolean("Left Top:", switchLeftTop.get());
-		SmartDashboard.putBoolean("Right Bottom:", switchRightBottom.get());
-		SmartDashboard.putBoolean("Left Bottom:", switchLeftBottom.get());
+//		SmartDashboard.putBoolean("Right Top:", switchRightTop.get());
+//		SmartDashboard.putBoolean("Left Top:", switchLeftTop.get());
+//		SmartDashboard.putBoolean("Right Bottom:", switchRightBottom.get());
+//		SmartDashboard.putBoolean("Left Bottom:", switchLeftBottom.get());
 		SmartDashboard.putString("Current Lifter State:", getCurrentState().toString());
+		SmartDashboard.putNumber("Tote Count:", toteCount);
 	}
 	
 	@Override

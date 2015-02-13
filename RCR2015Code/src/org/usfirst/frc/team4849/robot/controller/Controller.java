@@ -30,6 +30,7 @@ public abstract class Controller {
 	 */
 	private static int TOTE_UP;
 	private static int TOTE_DOWN;
+	private static int RESET_TOTE_COUNT;
 	
 	/*
 	 * Rollers
@@ -37,11 +38,12 @@ public abstract class Controller {
 	private static int TOTE_IN;
 	private static int TOTE_OUT;
 	
-	public Controller(int TOGGLE_DRIVETYPE, int RESET_GYRO, int TOTE_UP, int TOTE_DOWN, int TOTE_IN, int TOTE_OUT) {
+	public Controller(int TOGGLE_DRIVETYPE, int RESET_GYRO, int TOTE_UP, int TOTE_DOWN, int RESET_TOTE_COUNT, int TOTE_IN, int TOTE_OUT) {
 		this.TOGGLE_DRIVETYPE = TOGGLE_DRIVETYPE;
 		this.RESET_GYRO = RESET_GYRO;
 		this.TOTE_UP = TOTE_UP;
 		this.TOTE_DOWN = TOTE_DOWN;
+		this.RESET_TOTE_COUNT = RESET_TOTE_COUNT;
 		this.TOTE_IN = TOTE_IN;
 		this.TOTE_OUT = TOTE_OUT;
 	
@@ -82,6 +84,10 @@ public abstract class Controller {
 
 	public static int getToteDown() {
 		return TOTE_DOWN;
+	}
+	
+	public static int getResetToteCount() {
+		return RESET_TOTE_COUNT;
 	}
 
 	public static int getToteIn() {

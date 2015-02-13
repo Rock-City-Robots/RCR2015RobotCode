@@ -5,6 +5,7 @@ import org.usfirst.frc.team4849.robot.commands.LifterState;
 import org.usfirst.frc.team4849.robot.commands.MoveRoller;
 import org.usfirst.frc.team4849.robot.commands.MoveTote;
 import org.usfirst.frc.team4849.robot.commands.ResetGyro;
+import org.usfirst.frc.team4849.robot.commands.ResetToteCount;
 import org.usfirst.frc.team4849.robot.commands.RollerState;
 import org.usfirst.frc.team4849.robot.commands.ToggleDrivingMode;
 
@@ -22,6 +23,7 @@ public class Extreme3D extends Controller {
 	 */
 	private static final int TOTE_UP = 6;
 	private static final int TOTE_DOWN = 4;
+	private static final int RESET_TOTE_COUNT = 7;
 	
 	/*
 	 * Rollers
@@ -30,7 +32,7 @@ public class Extreme3D extends Controller {
 	private static final int TOTE_OUT = 3;
 	
 	public Extreme3D(Robot robot) {
-		super(TOGGLE_DRIVETYPE, RESET_GYRO, TOTE_UP, TOTE_DOWN, TOTE_IN, TOTE_OUT);
+		super(TOGGLE_DRIVETYPE, RESET_GYRO, TOTE_UP, TOTE_DOWN, RESET_TOTE_COUNT, TOTE_IN, TOTE_OUT);
 		this.robot = robot;
 		
 		bindKeys();
@@ -52,6 +54,8 @@ public class Extreme3D extends Controller {
 		
 		createButton(getToteDown()).whenPressed(new MoveTote(robot.getLifter(), LifterState.BOTTOM));
 		//getButton(getToteDown()).whenReleased(new MoveTote(robot.getLifter(), LifterState.DRIVE));
+		
+		createButton(getResetToteCount()).whenPressed(new ResetToteCount(robot.getLifter()));
 		
 		/*
 		 * Rollers

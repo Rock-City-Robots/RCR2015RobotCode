@@ -31,7 +31,7 @@ public class DualAction extends Controller {
 	
 
 	public DualAction(Robot robot) {
-		super(TOGGLE_DRIVETYPE, RESET_GYRO, TOTE_UP, TOTE_DOWN, TOTE_IN, TOTE_OUT);
+		super(TOGGLE_DRIVETYPE, RESET_GYRO, TOTE_UP, TOTE_DOWN, 7, TOTE_IN, TOTE_OUT);
 		this.robot = robot;
 		
 		bindKeys();

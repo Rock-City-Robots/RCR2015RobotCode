@@ -23,7 +23,7 @@ public class Robot extends IterativeRobot {
 	private Lifter lifter;
 	private Roller roller;
 	private Controller controller;
-	private Light light;
+	private static Light light;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -90,7 +90,7 @@ public class Robot extends IterativeRobot {
 		return roller;
 	}
 	
-	public Light getLights() {
+	public static Light getLights() {
 		return light;
 	}
 	

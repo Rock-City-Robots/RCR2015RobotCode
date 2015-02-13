@@ -41,15 +41,15 @@ public class MoveTote extends Command {
 
 	@Override
 	protected void interrupted() {
-		lifter.resetLifter();
 		finished = true;
+		lifter.setCurrentState(LifterState.INTERRUPTED);
+		end();
 
 	}
 	
 	@Override
 	protected void end() {
 		lifter.resetLifter();
-		finished = true;
 	}
 
 	@Override
