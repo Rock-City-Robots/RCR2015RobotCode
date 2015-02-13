@@ -47,11 +47,13 @@ public class Light extends Subsystem {
 		else if(voltage > maxVoltage) voltage = maxVoltage;
 		
 		percent = increment / incrementValue;
-		voltage = 5 - voltage;
+		//maxVoltage = EncoderArray.getValue();
+		voltage = maxVoltage - voltage;
 		voltage = voltage * percent;
 		
 		
 		light.setVoltage(maxVoltage - voltage);
+		maxVoltage= 5.0;
 	}
 	
     public void initDefaultCommand() {
