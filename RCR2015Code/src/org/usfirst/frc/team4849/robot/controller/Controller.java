@@ -4,19 +4,14 @@ import java.util.HashMap;
 
 import org.usfirst.frc.team4849.robot.Robot;
 import org.usfirst.frc.team4849.robot.RobotMap;
-import org.usfirst.frc.team4849.robot.commands.LifterState;
-import org.usfirst.frc.team4849.robot.commands.MoveRoller;
-import org.usfirst.frc.team4849.robot.commands.MoveTote;
-import org.usfirst.frc.team4849.robot.commands.ResetGyro;
-import org.usfirst.frc.team4849.robot.commands.RollerState;
-import org.usfirst.frc.team4849.robot.commands.ToggleDrivingMode;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public abstract class Controller {
+	private static Robot robot;
 	private static CubicJoystick controller = new CubicJoystick(RobotMap.CONTROLLER);
-	private HashMap<Integer,JoystickButton> buttonMap = new HashMap<Integer, JoystickButton>();	
+	private static HashMap<Integer,JoystickButton> buttonMap = new HashMap<Integer, JoystickButton>();	
 	
 	/*
 	 * DriveTrain
@@ -37,14 +32,15 @@ public abstract class Controller {
 	public static int TOTE_IN;
 	public static int TOTE_OUT;
 	
-	public Controller() {
-		
+	protected Controller(Robot robot) {
+		Controller.robot = robot;
+		bindKeys();
 	
 	}
 	
-	public void bindKeys() {}
+	protected abstract void bindKeys();
 	
-	public JoystickButton createButton(int buttonNumber) {
+	protected JoystickButton createButton(int buttonNumber) {
 		JoystickButton button;
 		
 		button = new JoystickButton(controller, buttonNumber);
@@ -53,13 +49,17 @@ public abstract class Controller {
 		return button;
 	}
 	
-	public JoystickButton getButton(int buttonNumber) {
+	protected JoystickButton getButton(int buttonNumber) {
 		if(buttonMap.containsKey(buttonNumber)) return buttonMap.get(buttonNumber);
 		else return createButton(buttonNumber);
 		
 	}
 	
-	public static Joystick getController() {
+	protected static Robot getRobot() {
+		return robot;
+	}
+	
+	protected static Joystick getController() {
 		return controller;
 	}
 	
