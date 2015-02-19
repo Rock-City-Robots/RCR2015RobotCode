@@ -4,15 +4,15 @@ import org.usfirst.frc.team4849.robot.RobotMap;
 import org.usfirst.frc.team4849.robot.commands.DriveType;
 import org.usfirst.frc.team4849.robot.commands.DriveWithCubicJoystick;
 
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem implements LightOutput{
 	private static SpeedController rightFront = new Talon(RobotMap.WHEEL_RIGHT_FRONT);
 	private static SpeedController rightBack = new Talon(RobotMap.WHEEL_RIGHT_BACK);
 	private static SpeedController leftBack = new Talon(RobotMap.WHEEL_LEFT_BACK);
@@ -26,6 +26,8 @@ public class DriveTrain extends Subsystem {
 	private static double maxSpeed = 0.8;
 	
 	public DriveTrain() {
+		resetGyro();
+		
 		robotDrive.setMaxOutput(maxSpeed);
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
 		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
@@ -43,6 +45,8 @@ public class DriveTrain extends Subsystem {
 				break;
 		}
 		
+		//if(driveType == )
+		 //gyroAngle *= 0.2;
 		
 		SmartDashboard.putNumber("Gyro Value:", gyroAngle);
 		
@@ -67,6 +71,11 @@ public class DriveTrain extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		
+	}
+
+	@Override
+	public double getLightOutput() {
+		return 0;
 	}
 		
 }

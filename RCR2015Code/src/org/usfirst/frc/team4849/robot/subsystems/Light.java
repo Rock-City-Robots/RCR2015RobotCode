@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4849.robot.subsystems;
 
 import org.usfirst.frc.team4849.robot.RobotMap;
-import org.usfirst.frc.team4849.robot.commands.PulseBattery;
+import org.usfirst.frc.team4849.robot.commands.ChangeBatteryLevel;
 
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.ControllerPower;
@@ -14,6 +14,7 @@ public class Light extends Subsystem {
 	private int incrementValue = 1000;
 	
 	private double maxVoltage = 5.0;
+	private double minVoltage = 0.2;
 	private double xSpeed = 0;
 	private double ySpeed = 0;
 	
@@ -24,14 +25,14 @@ public class Light extends Subsystem {
 	public Light() {
 		voltage = ControllerPower.getInputVoltage();
 		
-		setDefaultCommand(new PulseBattery(this));
+		setDefaultCommand(new ChangeBatteryLevel(this));
 	}
 	
 	public void end() {
-		light.setVoltage(maxVoltage);
+		light.setVoltage(minVoltage);
 	}
 	
-	public void pulse() {
+	public void changeLightLevel() {
 		speed = Math.pow(Math.pow(xSpeed, 2) + Math.pow(ySpeed, 2), 0.5);
 		speed = 1.0 + (0.5 - 1.0) * ((speed - 0.0) / (1.0 - 0.0));
 		
@@ -39,22 +40,22 @@ public class Light extends Subsystem {
 		voltage = ControllerPower.getInputVoltage();
 		voltage = (voltageOld - voltage)/2 + voltageOld;
 		
-		if(increment == incrementValue || increment == 0) direction = direction * -1;
+		if(increment == incrementValue || increment == 0) direction *= -1;
 		
-		increment = increment + direction;
-		voltage = voltage - 8;
+		increment += direction;
+		voltage -= 8;
 		maxVoltage *= speed;
 		
-		if(voltage < 0) voltage = 0;
+		if(voltage < minVoltage) voltage = minVoltage;
 		else if(voltage > maxVoltage) voltage = maxVoltage;
 		
 		percent = increment / incrementValue;
 		voltage = maxVoltage - voltage;
-		voltage = voltage * percent;
+		voltage *= percent;
 		
 		
 		light.setVoltage(maxVoltage - voltage);
-		maxVoltage= 5.0;
+		maxVoltage = 5.0;
 	}
 	
     public void initDefaultCommand() {

@@ -24,6 +24,8 @@ public class Extreme3D extends Controller {
 		TOTE_IN = 5;
 		TOTE_OUT = 3;
 		
+		bindKeys();
+		
 	}
 
 	@Override

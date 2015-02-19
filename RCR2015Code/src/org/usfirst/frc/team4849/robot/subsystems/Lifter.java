@@ -114,10 +114,10 @@ public class Lifter extends Subsystem {
 	}
 	
 	public void outputSwitchs() {
-//		SmartDashboard.putBoolean("Right Top:", switchRightTop.get());
-//		SmartDashboard.putBoolean("Left Top:", switchLeftTop.get());
-//		SmartDashboard.putBoolean("Right Bottom:", switchRightBottom.get());
-//		SmartDashboard.putBoolean("Left Bottom:", switchLeftBottom.get());
+		SmartDashboard.putBoolean("Right Top:", switchRightTop.get());
+		SmartDashboard.putBoolean("Left Top:", switchLeftTop.get());
+		SmartDashboard.putBoolean("Right Bottom:", switchRightBottom.get());
+		SmartDashboard.putBoolean("Left Bottom:", switchLeftBottom.get());
 		SmartDashboard.putString("Current Lifter State:", getCurrentState().toString());
 		SmartDashboard.putNumber("Tote Count:", toteCount);
 	}

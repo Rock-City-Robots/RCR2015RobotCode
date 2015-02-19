@@ -4,12 +4,12 @@ import org.usfirst.frc.team4849.robot.subsystems.Light;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PulseBattery extends Command{
+public class ChangeBatteryLevel extends Command{
 
 	
 	private Light light;
 	
-	public PulseBattery(Light light) {
+	public ChangeBatteryLevel(Light light) {
 		requires(light);
 		this.light = light;
 	}
@@ -20,7 +20,7 @@ public class PulseBattery extends Command{
 
 	@Override
 	protected void execute() {
-		light.pulse();
+		light.changeLightLevel();
 	}
 
 	@Override

@@ -16,25 +16,24 @@ public abstract class Controller {
 	/*
 	 * DriveTrain
 	 */
-	public static int TOGGLE_DRIVETYPE;
-	public static int RESET_GYRO;
+	protected static int TOGGLE_DRIVETYPE;
+	protected static int RESET_GYRO;
 	
 	/*
 	 * Lifter
 	 */
-	public static int TOTE_UP;
-	public static int TOTE_DOWN;
-	public static int RESET_TOTE_COUNT;
+	protected static int TOTE_UP;
+	protected static int TOTE_DOWN;
+	protected static int RESET_TOTE_COUNT;
 	
 	/*
 	 * Rollers
 	 */
-	public static int TOTE_IN;
-	public static int TOTE_OUT;
+	protected static int TOTE_IN;
+	protected static int TOTE_OUT;
 	
 	protected Controller(Robot robot) {
 		Controller.robot = robot;
-		bindKeys();
 	
 	}
 	
@@ -59,7 +58,7 @@ public abstract class Controller {
 		return robot;
 	}
 	
-	protected static Joystick getController() {
+	public static Joystick getController() {
 		return controller;
 	}
 	

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4849.robot;
 
+import org.usfirst.frc.team4849.robot.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team4849.robot.controller.Controller;
 import org.usfirst.frc.team4849.robot.controller.Extreme3D;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
@@ -22,8 +23,8 @@ public class Robot extends IterativeRobot {
 	private DriveTrain driveTrain;
 	private Lifter lifter;
 	private Roller roller;
-	private Controller controller;
 	private static Light light;
+	private Controller controller;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -35,6 +36,7 @@ public class Robot extends IterativeRobot {
 		roller = new Roller();
 		light = new Light();
 		controller = new Extreme3D(this);
+
 	}
 
 	public void disabledPeriodic() {
@@ -42,41 +44,33 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
+		Scheduler.getInstance().add(new AutonomousCommandGroup(this));
 	}
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
 	public void teleopInit() {
+
 	}
 
-	/**
-	 * This function is called when the disabled button is hit. You can use it
-	 * to reset subsystems before shutting down.
-	 */
 	public void disabledInit() {
 
 	}
 
-	/**
-	 * This function is called periodically during operator control
-	 */
 	public void teleopPeriodic() {
-		lifter.outputSwitchs();
+		//lifter.outputSwitchs();
+		//roller.outputDashboard();
 		Scheduler.getInstance().run();
 
 	}
 
-	/**
-	 * This function is called periodically during test mode
-	 */
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+	
+	///////////////// GETTERS ////////////////////////
 
 	public DriveTrain getDriveTrain() {
 		return driveTrain;
