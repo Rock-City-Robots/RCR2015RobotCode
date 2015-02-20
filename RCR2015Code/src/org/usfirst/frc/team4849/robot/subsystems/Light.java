@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4849.robot.subsystems;
 
+import org.usfirst.frc.team4849.robot.Robot;
 import org.usfirst.frc.team4849.robot.RobotMap;
 import org.usfirst.frc.team4849.robot.commands.ChangeBatteryLevel;
 
@@ -21,8 +22,10 @@ public class Light extends Subsystem {
 	private double voltage, voltageOld, percent, speed;
 	
 	private AnalogOutput light = new AnalogOutput(RobotMap.LIGHTS_BATTERY);
+	private Robot robot;
 
-	public Light() {
+	public Light(Robot robot) {
+		this.robot = robot;
 		voltage = ControllerPower.getInputVoltage();
 		
 		setDefaultCommand(new ChangeBatteryLevel(this));
@@ -65,6 +68,16 @@ public class Light extends Subsystem {
     public void update(AxisType a, double b) {
     	if(a.equals(AxisType.kX)) xSpeed = b;
     	else if(a == AxisType.kY) ySpeed = b;
+    }
+    
+    private double getTotalVoltage() {
+    	double voltage = 0;
+    	
+    	voltage += robot.getDriveTrain().getLightOutput() * 0.5;
+    	voltage += robot.getLifter().getLightOutput() * 0.35;
+    	voltage += robot.getRoller().getLightOutput() * 0.15;
+    	
+    	return voltage;
     }
 }
 

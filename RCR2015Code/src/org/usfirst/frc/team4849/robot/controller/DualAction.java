@@ -19,7 +19,6 @@ public class DualAction extends Controller {
 //		
 //		TOTE_UP = 1;
 //		TOTE_DOWN = 2;
-//		RESET_TOTE_COUNT = 7;
 //		
 //		TOTE_IN = 3;
 //		TOTE_OUT = 4;
@@ -38,7 +37,6 @@ public class DualAction extends Controller {
 //		 */
 //		createButton(TOTE_UP).whenPressed(new MoveTote(getRobot().getLifter(), LifterState.TOP));
 //		createButton(TOTE_DOWN).whenPressed(new MoveTote(getRobot().getLifter(), LifterState.BOTTOM));
-//		createButton(RESET_TOTE_COUNT).whenPressed(new ResetToteCount(getRobot().getLifter()));
 //		
 //		/*
 //		 * Rollers

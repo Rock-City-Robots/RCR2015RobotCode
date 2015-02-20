@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Lifter extends Subsystem {
+public class Lifter extends Subsystem implements LightOutput{
 	private static CANJaguar beltRight = new CANJaguar(RobotMap.BELT_RIGHT);
 	private static CANJaguar beltLeft = new CANJaguar(RobotMap.BELT_LEFT);
 	
@@ -23,7 +23,7 @@ public class Lifter extends Subsystem {
 	private static boolean beltRightFinished = false;
 	
 	private static double beltSpeed = 0.25;
-	private static int toteCount = 0;
+	private static double currentSpeed = 0.0;
 	
 	public Lifter() {
 		beltRight.setPercentMode();
@@ -56,9 +56,12 @@ public class Lifter extends Subsystem {
 		
 		if(beltRightFinished && beltLeftFinished) {
 			currentState = LifterState.TOP;
-			toteCount += 1;
+			currentSpeed = 0.0;
 		}
-		else currentState = LifterState.MOVE;
+		else {
+			currentState = LifterState.MOVE;
+			currentSpeed = 1.0;
+		}
 		
 	}
 	
@@ -78,22 +81,17 @@ public class Lifter extends Subsystem {
 		
 		if(beltRightFinished && beltLeftFinished) {
 			currentState = LifterState.BOTTOM;
-			toteCount += 1;
+			currentSpeed = 0.0;
 		}
-		else currentState = LifterState.MOVE;
+		else {
+			currentState = LifterState.MOVE;
+			currentSpeed = 1.0;
+		}
 		
 	}
 	
 	public void drive() {
 		
-	}
-	
-	public static int getToteCount() {
-		return toteCount;
-	}
-	
-	public static void resetToteCount() {
-		toteCount = 0;
 	}
 	
 	public LifterState getCurrentState() {
@@ -119,12 +117,17 @@ public class Lifter extends Subsystem {
 		SmartDashboard.putBoolean("Right Bottom:", switchRightBottom.get());
 		SmartDashboard.putBoolean("Left Bottom:", switchLeftBottom.get());
 		SmartDashboard.putString("Current Lifter State:", getCurrentState().toString());
-		SmartDashboard.putNumber("Tote Count:", toteCount);
+		SmartDashboard.putNumber("Lifter Speed:", currentSpeed);
 	}
 	
 	@Override
 	protected void initDefaultCommand() {
 
+	}
+
+	@Override
+	public double getLightOutput() {
+		return currentSpeed;
 	}
 
 }

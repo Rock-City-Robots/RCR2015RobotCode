@@ -15,20 +15,24 @@ public class Roller extends Subsystem implements LightOutput {
 	private static DigitalInput switchBack = new DigitalInput(RobotMap.SWITCH_BACK);
 	
 	private double rollerSpeed = 1;
+	private double currentSpeed = 0.0;
 	
 	public void in() {
 		rollerRight.set(-rollerSpeed);
 		rollerLeft.set(rollerSpeed);
+		currentSpeed = rollerSpeed;
 	}
 	
 	public void out() {
 		rollerRight.set(rollerSpeed);
 		rollerLeft.set(-rollerSpeed);
+		currentSpeed = rollerSpeed;
 	}
 	
 	public void stop() {
 		rollerRight.set(0);
 		rollerLeft.set(0);
+		currentSpeed = 0.0;
 	}
 	
 	public boolean isInsideRobot(){
@@ -39,14 +43,14 @@ public class Roller extends Subsystem implements LightOutput {
 	protected void initDefaultCommand() {
 
 	}
-
-	@Override
-	public double getLightOutput() {
-		return 0;
-	}
 	
 	public void outputDashboard() {
 		SmartDashboard.putBoolean("Switch Back", switchBack.get());
+	}
+	
+	@Override
+	public double getLightOutput() {
+		return currentSpeed;
 	}
 
 }

@@ -24,7 +24,6 @@ public abstract class Controller {
 	 */
 	protected static int TOTE_UP;
 	protected static int TOTE_DOWN;
-	protected static int RESET_TOTE_COUNT;
 	
 	/*
 	 * Rollers

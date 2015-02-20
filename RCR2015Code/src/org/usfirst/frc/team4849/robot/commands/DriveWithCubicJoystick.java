@@ -18,6 +18,8 @@ public class DriveWithCubicJoystick extends Command{
 	private static double movementMaxSpeed = 0.75;
 	private static double rotationMaxSpeed = 0.50;
 	
+	private static boolean end = false;
+	
 	
 	public DriveWithCubicJoystick(DriveTrain driveTrain) {
 		requires(driveTrain);
@@ -27,6 +29,7 @@ public class DriveWithCubicJoystick extends Command{
 	
 	@Override
 	protected void end() {
+		end = true;
 	}
 
 	@Override
@@ -35,6 +38,7 @@ public class DriveWithCubicJoystick extends Command{
 		
 		SmartDashboard.putNumber("Movement Arc:", movementArc);
 		SmartDashboard.putNumber("Rotation Arc:", rotationArc);
+		
 		SmartDashboard.putNumber("Movement Max Speed:", movementMaxSpeed);
 		SmartDashboard.putNumber("Rotation Max Speed:", rotationMaxSpeed);
 	}
@@ -46,12 +50,12 @@ public class DriveWithCubicJoystick extends Command{
 
 	@Override
 	protected void interrupted() {
-		
+		end();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return end;
 	}
 
 }

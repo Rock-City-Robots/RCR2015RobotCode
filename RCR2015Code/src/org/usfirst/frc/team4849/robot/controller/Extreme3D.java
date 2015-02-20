@@ -19,7 +19,6 @@ public class Extreme3D extends Controller {
 		
 		TOTE_UP = 6;
 		TOTE_DOWN = 4;
-		RESET_TOTE_COUNT = 7;
 		
 		TOTE_IN = 5;
 		TOTE_OUT = 3;
@@ -41,7 +40,6 @@ public class Extreme3D extends Controller {
 		 */
 		createButton(TOTE_UP).whenPressed(new MoveTote(getRobot().getLifter(), LifterState.TOP));
 		createButton(TOTE_DOWN).whenPressed(new MoveTote(getRobot().getLifter(), LifterState.BOTTOM));
-		createButton(RESET_TOTE_COUNT).whenPressed(new ResetToteCount(getRobot().getLifter()));
 		
 		/*
 		 * Rollers

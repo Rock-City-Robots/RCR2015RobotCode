@@ -1,62 +1,50 @@
 package org.usfirst.frc.team4849.robot.controller;
 
-import org.usfirst.frc.team4849.robot.Robot;
-import org.usfirst.frc.team4849.robot.subsystems.Light;
-
 import edu.wpi.first.wpilibj.Joystick;
 
 public class CubicJoystick extends Joystick {
-	private double power = 3.0;
+	private double axisOutput;
+	private double axisInverse;
+	private double safezone =  0.05;
+	private double pow = 3.0;
 
 	public CubicJoystick(int port) {
 		super(port);
 	}
-
+	
 	public void setPower(double pow) {
-		this.power = pow;
+		this.pow = pow;
 	}
-
-	private boolean safezone(double a) {
-		return a < 0.1;
+	
+	private double curveAxis(double axisOutput, double pow, double max) {
+		double output;
+		this.pow = pow;
+		
+		output = 1.0 * ((axisOutput - safezone) / (1 - safezone));
+		output = Math.pow(axisOutput, this.pow);
+		output *= max;
+		
+		return output;
 	}
 
 	// This function alters the Joystick input
-	private double curve(AxisType a, double pow, double max) {
-		Light light = Robot.getLights();
-		double b = this.getAxis(a);
-		double c = b * -1;
-
-		if (b > c) {
-			if (safezone(b)) return 0;
-
-			b = 0.0 + (1.0 - 0.0) * ((b - 0.1) / (1 - 0.1));
-			b = Math.pow(b, pow);
-			b = 0.0 + (max - 0.0) * ((b - 0.0) / (1 - 0.0));
-			
-			light.update(a, b);
-			return b;
-
-		} else {
-			if (safezone(c)) return 0;
-
-			c = 0.0 + (1.0 - 0.0) * ((c - 0.1) / (1 - 0.1));
-			c = Math.pow(c, pow);
-			c = 0.0 + (max - 0.0) * ((c - 0.0) / (1 - 0.0));
-			b = c * -1;
-
-			if (b > c) {
-				light.update(a, c);
-				return c;
-			}
-			
-			light.update(a, b);
-			return b;
-		}
-	}
-
 	public double getValue(AxisType axis, double pow, double max) {
-		this.power = pow;
-		return curve(axis, power, max);
-	}
+		axisOutput = this.getAxis(axis);
+		axisInverse = axisOutput * -1;
+		
+		if ((axisOutput < safezone) || (axisInverse < safezone)) return 0;
+		
+		if (axisOutput > axisInverse) {
+			curveAxis(axisOutput, pow, max);
+		}
+		else {
+			axisInverse = curveAxis(axisInverse, pow, max);
+			axisOutput = axisInverse * -1;
 
+			if (axisOutput > axisInverse) return axisInverse;
+			
+		}
+		
+		return axisOutput;
+	}
 }
