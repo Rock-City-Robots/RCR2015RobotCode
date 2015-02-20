@@ -2,82 +2,70 @@ package org.usfirst.frc.team4849.robot.subsystems;
 
 import org.usfirst.frc.team4849.robot.Robot;
 import org.usfirst.frc.team4849.robot.RobotMap;
-import org.usfirst.frc.team4849.robot.commands.ChangeBatteryLevel;
+import org.usfirst.frc.team4849.robot.commands.UpdateLight;
 
 import edu.wpi.first.wpilibj.AnalogOutput;
-import edu.wpi.first.wpilibj.ControllerPower;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Light extends Subsystem {
-	private int increment = 1;
-	private int direction = 1;
-	private int incrementValue = 1000;
-	
+	private double maxTickIncrement = 0.5;
 	private double maxVoltage = 5.0;
-	private double minVoltage = 0.2;
-	private double xSpeed = 0;
-	private double ySpeed = 0;
+	private double minVoltage = 0.4;
+	private double voltage = getFilteredVoltage(minVoltage);
 	
-	private double voltage, voltageOld, percent, speed;
-	
-	private AnalogOutput light = new AnalogOutput(RobotMap.LIGHTS_BATTERY);
+	private AnalogOutput light = new AnalogOutput(RobotMap.LIGHT);
 	private Robot robot;
 
 	public Light(Robot robot) {
 		this.robot = robot;
-		voltage = ControllerPower.getInputVoltage();
 		
-		setDefaultCommand(new ChangeBatteryLevel(this));
+		light.setVoltage(getUnfilteredVoltage(voltage));
+		setDefaultCommand(new UpdateLight(this));
 	}
 	
+	public void update() {
+		
+		if(getGlobalVoltage() > voltage) {
+			if(voltage < getFilteredVoltage(maxVoltage)) voltage += maxTickIncrement;
+			else voltage = getFilteredVoltage(maxVoltage);
+			
+		}
+		
+		else if(getGlobalVoltage() < voltage) {
+			if(voltage > getFilteredVoltage(minVoltage)) voltage -= maxTickIncrement;
+			else voltage = getFilteredVoltage(minVoltage);
+			
+		}
+		
+		light.setVoltage(getUnfilteredVoltage(voltage));
+		
+	}
+	
+	private double getFilteredVoltage(double rawVoltage) {
+		return rawVoltage / maxVoltage;
+	}
+	
+	private double getUnfilteredVoltage(double voltage) {
+		return voltage * maxVoltage;
+	}
+    
+    private double getGlobalVoltage() {
+    	double globalVoltage = 0;
+    	
+    	globalVoltage += robot.getDriveTrain().getLightOutput() * 0.7;
+    	globalVoltage += robot.getLifter().getLightOutput() * 0.2;
+    	globalVoltage += robot.getRoller().getLightOutput() * 0.1;
+    	
+    	return globalVoltage;
+    }
+    
 	public void end() {
 		light.setVoltage(minVoltage);
 	}
-	
-	public void changeLightLevel() {
-		speed = Math.pow(Math.pow(xSpeed, 2) + Math.pow(ySpeed, 2), 0.5);
-		speed = 1.0 + (0.5 - 1.0) * ((speed - 0.0) / (1.0 - 0.0));
-		
-		voltageOld = voltage;
-		voltage = ControllerPower.getInputVoltage();
-		voltage = (voltageOld - voltage)/2 + voltageOld;
-		
-		if(increment == incrementValue || increment == 0) direction *= -1;
-		
-		increment += direction;
-		voltage -= 8;
-		maxVoltage *= speed;
-		
-		if(voltage < minVoltage) voltage = minVoltage;
-		else if(voltage > maxVoltage) voltage = maxVoltage;
-		
-		percent = increment / incrementValue;
-		voltage = maxVoltage - voltage;
-		voltage *= percent;
-		
-		
-		light.setVoltage(maxVoltage - voltage);
-		maxVoltage = 5.0;
+
+	@Override
+	protected void initDefaultCommand() {
 	}
 	
-    public void initDefaultCommand() {
-
-    }
-    
-    public void update(AxisType a, double b) {
-    	if(a.equals(AxisType.kX)) xSpeed = b;
-    	else if(a == AxisType.kY) ySpeed = b;
-    }
-    
-    private double getTotalVoltage() {
-    	double voltage = 0;
-    	
-    	voltage += robot.getDriveTrain().getLightOutput() * 0.5;
-    	voltage += robot.getLifter().getLightOutput() * 0.35;
-    	voltage += robot.getRoller().getLightOutput() * 0.15;
-    	
-    	return voltage;
-    }
 }
 

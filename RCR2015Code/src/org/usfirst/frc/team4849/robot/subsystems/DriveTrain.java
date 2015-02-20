@@ -24,14 +24,12 @@ public class DriveTrain extends Subsystem implements LightOutput{
 	
 	private static double gyroAngle;
 	private static double maxSpeed = 0.6;
-	private static double sensitivity = 0.25;
 	private static double currentSpeed = 0.0;
 	
 	public DriveTrain() {
 		gyro.initGyro();
 		
 		robotDrive.setMaxOutput(maxSpeed);
-		robotDrive.setSensitivity(sensitivity);
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
 		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
 		
@@ -39,6 +37,13 @@ public class DriveTrain extends Subsystem implements LightOutput{
 	}
 	
 	public void drive(double x, double y, double z){
+		double speed = 0;
+		
+		speed += (Math.abs(x + y) / 2) * 0.8;
+		speed += Math.abs(z) * 0.2;
+		
+		currentSpeed = speed;
+		
 		gyroAngle = gyro.getAngle();
 		
 		switch (driveType) {
@@ -47,8 +52,6 @@ public class DriveTrain extends Subsystem implements LightOutput{
 			case FIELD_ORIENTED: gyroAngle %= 360;
 				break;
 		}
-		
-		currentSpeed = Math.abs(x + y + z) / 3;
 		
 		SmartDashboard.putNumber("Gyro Value:", -gyroAngle);
 		SmartDashboard.putNumber("DriveTrain Speed:", currentSpeed);

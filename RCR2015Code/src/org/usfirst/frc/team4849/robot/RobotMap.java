@@ -47,5 +47,5 @@ public class RobotMap {
 	/*
 	 * LIGHTS
 	 */
-	public static final int LIGHTS_BATTERY = 1;
+	public static final int LIGHT = 1;
 }

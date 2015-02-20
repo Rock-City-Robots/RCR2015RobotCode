@@ -12,8 +12,8 @@ public class DriveWithCubicJoystick extends Command{
 	private DriveTrain driveTrain;
 	private CubicJoystick controller;
 	
-	private static int movementArc = 5;
-	private static int rotationArc = 2;
+	private static int movementArc = 4;
+	private static int rotationArc = 1;
 	
 	private static double movementMaxSpeed = 0.75;
 	private static double rotationMaxSpeed = 0.50;
@@ -25,11 +25,6 @@ public class DriveWithCubicJoystick extends Command{
 		requires(driveTrain);
 		this.driveTrain = driveTrain;
 		controller = (CubicJoystick) Controller.getController();
-	}
-	
-	@Override
-	protected void end() {
-		end = true;
 	}
 
 	@Override
@@ -56,6 +51,11 @@ public class DriveWithCubicJoystick extends Command{
 	@Override
 	protected boolean isFinished() {
 		return end;
+	}
+	
+	@Override
+	protected void end() {
+		end = true;
 	}
 
 }

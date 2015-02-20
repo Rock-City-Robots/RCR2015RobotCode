@@ -4,12 +4,12 @@ import org.usfirst.frc.team4849.robot.subsystems.Light;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ChangeBatteryLevel extends Command{
-
-	
+public class UpdateLight extends Command{
 	private Light light;
 	
-	public ChangeBatteryLevel(Light light) {
+	private boolean end = false;
+	
+	public UpdateLight(Light light) {
 		requires(light);
 		this.light = light;
 	}
@@ -20,22 +20,23 @@ public class ChangeBatteryLevel extends Command{
 
 	@Override
 	protected void execute() {
-		light.changeLightLevel();
+		light.update();
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return end;
 	}
 
 	@Override
 	protected void end() {
+		end = true;
 		light.end();
 	}
 
 	@Override
 	protected void interrupted() {
-		light.end();
+		end();
 	}
 	
 }
