@@ -8,10 +8,14 @@ import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Light extends Subsystem {
-	private double maxTickIncrement = 0.5;
+	private double maxTickIncrement = 0.1;
 	private double maxVoltage = 5.0;
 	private double minVoltage = 0.4;
 	private double voltage = getFilteredVoltage(minVoltage);
+	
+	private final double driveTrainContribution = 0.7;
+	private final double lifterContribution = 0.2;
+	private final double rollerContribution = 0.1;
 	
 	private AnalogOutput light = new AnalogOutput(RobotMap.LIGHT);
 	private Robot robot;
@@ -52,9 +56,9 @@ public class Light extends Subsystem {
     private double getGlobalVoltage() {
     	double globalVoltage = 0;
     	
-    	globalVoltage += robot.getDriveTrain().getLightOutput() * 0.7;
-    	globalVoltage += robot.getLifter().getLightOutput() * 0.2;
-    	globalVoltage += robot.getRoller().getLightOutput() * 0.1;
+    	globalVoltage += robot.getDriveTrain().getLightOutput() * driveTrainContribution;
+    	globalVoltage += robot.getLifter().getLightOutput() * lifterContribution;
+    	globalVoltage += robot.getRoller().getLightOutput() * rollerContribution;
     	
     	return globalVoltage;
     }

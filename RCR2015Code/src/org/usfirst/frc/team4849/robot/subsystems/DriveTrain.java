@@ -26,6 +26,9 @@ public class DriveTrain extends Subsystem implements LightOutput{
 	private static double maxSpeed = 0.6;
 	private static double currentSpeed = 0.0;
 	
+	private static final double movementContribution = 0.8;
+	private static final double rotationContribution = 0.2;
+	
 	public DriveTrain() {
 		gyro.initGyro();
 		
@@ -39,8 +42,8 @@ public class DriveTrain extends Subsystem implements LightOutput{
 	public void drive(double x, double y, double z){
 		double speed = 0;
 		
-		speed += (Math.abs(x + y) / 2) * 0.8;
-		speed += Math.abs(z) * 0.2;
+		speed += (Math.abs(x + y) / 2) * movementContribution;
+		speed += Math.abs(z) * rotationContribution;
 		
 		currentSpeed = speed;
 		
