@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		lifter = new Lifter();
 		roller = new Roller();
-		light = new Light();
+		light = new Light(this);
 		controller = new Extreme3D(this);
 
 	}
