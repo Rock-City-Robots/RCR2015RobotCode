@@ -1,13 +1,6 @@
 package org.usfirst.frc.team4849.robot.controller;
 
 import org.usfirst.frc.team4849.robot.Robot;
-import org.usfirst.frc.team4849.robot.commands.LifterState;
-import org.usfirst.frc.team4849.robot.commands.MoveRoller;
-import org.usfirst.frc.team4849.robot.commands.MoveTote;
-import org.usfirst.frc.team4849.robot.commands.ResetGyro;
-import org.usfirst.frc.team4849.robot.commands.ResetToteCount;
-import org.usfirst.frc.team4849.robot.commands.RollerState;
-import org.usfirst.frc.team4849.robot.commands.ToggleDrivingMode;
 
 public class DualAction extends Controller {
 //

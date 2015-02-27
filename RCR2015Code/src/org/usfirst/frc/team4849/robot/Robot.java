@@ -32,9 +32,9 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		driveTrain = new DriveTrain();
-		lifter = new Lifter();
-		roller = new Roller();
-		light = new Light(this);
+		//lifter = new Lifter();
+		//roller = new Roller();
+		//light = new Light(this);
 		controller = new Extreme3D(this);
 
 	}
@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 	}
 
-	public void autonomousInit() {
+	public void autonomousInit() {lkjlkj
 		Scheduler.getInstance().add(new AutonomousCommandGroup(this));
 	}
 
