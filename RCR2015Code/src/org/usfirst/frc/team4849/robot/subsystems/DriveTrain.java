@@ -40,13 +40,8 @@ public class DriveTrain extends Subsystem implements LightOutput{
 	}
 	
 	public void drive(double x, double y, double z){
-		double speed = 0;
 		
-		speed += (Math.abs(x + y) / 2) * movementContribution;
-		speed += Math.abs(z) * rotationContribution;
-		
-		currentSpeed = speed;
-		
+		currentSpeed = ((Math.abs(x + y) / 2) * movementContribution) + (Math.abs(z) * rotationContribution);
 		gyroAngle = gyro.getAngle();
 		
 		switch (driveType) {

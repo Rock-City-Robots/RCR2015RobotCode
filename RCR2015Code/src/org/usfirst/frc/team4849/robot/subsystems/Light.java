@@ -6,6 +6,7 @@ import org.usfirst.frc.team4849.robot.commands.UpdateLight;
 
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Light extends Subsystem {
 	private double maxTickIncrement = 0.1;
@@ -42,6 +43,10 @@ public class Light extends Subsystem {
 		}
 		
 		light.setVoltage(getUnfilteredVoltage(voltage));
+		
+		SmartDashboard.putNumber("Global Light Voltage", getGlobalVoltage());
+		SmartDashboard.putNumber("Light Filtered Voltage", voltage);
+		SmartDashboard.putNumber("Light Unfiltered Voltage", getFilteredVoltage(voltage));
 		
 	}
 	
