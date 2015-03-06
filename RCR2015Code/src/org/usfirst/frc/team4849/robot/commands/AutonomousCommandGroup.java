@@ -7,8 +7,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousCommandGroup extends CommandGroup {
 	
 	public AutonomousCommandGroup(Robot robot){
-		addSequential(new GrabToteCommand(robot.getRoller(), robot.getDriveTrain()));
+		//addSequential(new GrabToteCommand(robot.getRoller(), robot.getDriveTrain()));
 		//addSequential(new MoveTote(robot.getLifter(), LifterState.TOP));
+		//addSequential(new DriveToAutoZoneCommand());
+		
+		addSequential(new DriveToAutoZoneCommand(robot.getDriveTrain()));
+		addSequential(new Dance(robot.getDriveTrain()));
 	}
 
 }

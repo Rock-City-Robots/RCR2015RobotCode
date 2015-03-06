@@ -1,8 +1,8 @@
 package org.usfirst.frc.team4849.robot;
 
 import org.usfirst.frc.team4849.robot.commands.AutonomousCommandGroup;
+import org.usfirst.frc.team4849.robot.commands.DriveType;
 import org.usfirst.frc.team4849.robot.controller.Controller;
-import org.usfirst.frc.team4849.robot.controller.DualAction;
 import org.usfirst.frc.team4849.robot.controller.Extreme3D;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
@@ -37,7 +37,6 @@ public class Robot extends IterativeRobot {
 		roller = new Roller();
 		light = new Light(this);
 		controller = new Extreme3D(this);
-
 	}
 
 	public void disabledPeriodic() {
@@ -53,7 +52,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopInit() {
-
+		driveTrain.setDriveType(DriveType.FIELD_ORIENTED);
 	}
 
 	public void disabledInit() {
@@ -89,8 +88,8 @@ public class Robot extends IterativeRobot {
 		return controller;
 	}
 	
+	
 	public static Light getLights() {
 		return light;
 	}
-	
 }

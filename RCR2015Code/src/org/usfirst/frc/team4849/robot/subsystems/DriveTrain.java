@@ -30,6 +30,8 @@ public class DriveTrain extends Subsystem implements LightOutput{
 	private static final double rotationContribution = 0.2;
 	
 	public DriveTrain() {
+		
+		//TODO: do we really need this?
 		gyro.initGyro();
 		
 		robotDrive.setMaxOutput(maxSpeed);
@@ -64,8 +66,9 @@ public class DriveTrain extends Subsystem implements LightOutput{
 			robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
 		}
 		
-		SmartDashboard.putNumber("Gyro Value:", -gyroAngle);
+		SmartDashboard.putNumber("Gyro Value:", gyroAngle);
 		SmartDashboard.putNumber("DriveTrain Speed:", currentSpeed);
+		SmartDashboard.putString("Drive Type:", driveType.toString());
 		
 		robotDrive.mecanumDrive_Cartesian(-x, -y, -z, gyroAngle);
 	}
@@ -81,8 +84,10 @@ public class DriveTrain extends Subsystem implements LightOutput{
 			case FIELD_ORIENTED: driveType = DriveType.ROBOT_ORIENTED;
 				break;
 		}
-		
-		SmartDashboard.putString("Drive Type:", driveType.toString());
+	}
+	
+	public void setDriveType(DriveType driveType){
+		this.driveType = driveType;
 	}
 	
 	@Override

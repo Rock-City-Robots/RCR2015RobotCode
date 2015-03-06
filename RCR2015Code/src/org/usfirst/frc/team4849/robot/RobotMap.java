@@ -35,15 +35,10 @@ public class RobotMap {
 	 * ANALOG I/0
 	 */
 	public static final int GYRO = 0;
+	public static final int LIGHT = 1;
 	
 	/*
 	 * USB PORTS 
 	 */
 	public static final int CONTROLLER = 0;
-
-	
-	/*
-	 * LIGHTS
-	 */
-	public static final int LIGHT = 1;
 }

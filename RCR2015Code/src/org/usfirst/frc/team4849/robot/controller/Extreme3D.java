@@ -22,8 +22,8 @@ public class Extreme3D extends Controller {
 		TOTE_DOWN = 4;
 		DRIVE_MODE = 2;
 		
-		TOTE_IN = 5;
-		TOTE_OUT = 3;
+		TOTE_IN = 3;
+		TOTE_OUT = 5;
 		
 		bindKeys();
 		
