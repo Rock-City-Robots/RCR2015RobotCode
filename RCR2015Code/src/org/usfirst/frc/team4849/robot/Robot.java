@@ -9,6 +9,7 @@ import org.usfirst.frc.team4849.robot.subsystems.Lifter;
 import org.usfirst.frc.team4849.robot.subsystems.Light;
 import org.usfirst.frc.team4849.robot.subsystems.Roller;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 	private Roller roller;
 	private static Light light;
 	private static Controller controller;
+	private DigitalInput autoModeJumperInput;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -37,6 +39,7 @@ public class Robot extends IterativeRobot {
 		roller = new Roller();
 		light = new Light(this);
 		controller = new Extreme3D(this);
+		autoModeJumperInput = new DigitalInput(RobotMap.AUTO_MODE_JUMPER);
 	}
 
 	public void disabledPeriodic() {
@@ -44,7 +47,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
-		Scheduler.getInstance().add(new AutonomousCommandGroup(this));
+		
+		Scheduler.getInstance().add(new AutonomousCommandGroup(this, autoModeJumperInput.get()));
 	}
 
 	public void autonomousPeriodic() {

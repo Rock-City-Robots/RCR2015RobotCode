@@ -18,7 +18,7 @@ public class Lifter extends Subsystem implements LightOutput{
 	private static DigitalInput switchLeftBottom = new DigitalInput(RobotMap.SWITCH_LEFT_BOTTOM);
 	private static DigitalInput switchLeftTop = new DigitalInput(RobotMap.SWITCH_LEFT_TOP);
 	
-	private static LifterState currentState = LifterState.TOP;
+	private static LifterState currentState = LifterState.BOTTOM;
 	
 	private static boolean beltLeftFinished = false;
 	private static boolean beltRightFinished = false;

@@ -29,6 +29,7 @@ public class RobotMap {
 	public static final int SWITCH_LEFT_BOTTOM = 2;
 	public static final int SWITCH_LEFT_TOP = 3;
 	public static final int SWITCH_BACK = 4;
+	public static final int AUTO_MODE_JUMPER = 6;
 	
 	
 	/*
