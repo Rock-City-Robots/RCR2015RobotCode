@@ -17,7 +17,7 @@ public class AutonomousCommandGroup extends CommandGroup {
 			addSequential(new MoveTote(robot.getLifter(), LifterState.DRIVE));
 			
 			//step 2: drive right to autozone
-			addSequential(new DriveCommnad(robot.getDriveTrain(), .7,0 ,0 , 2.5));
+			addSequential(new DriveCommnad(robot.getDriveTrain(), .7,0 ,0 , 2.75));
 			
 			//step 3: Lifterstate bottom
 			addSequential(new MoveTote(robot.getLifter(), LifterState.BOTTOM));
