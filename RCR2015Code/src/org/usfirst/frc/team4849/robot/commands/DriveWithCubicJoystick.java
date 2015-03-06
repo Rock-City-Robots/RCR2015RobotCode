@@ -12,7 +12,7 @@ public class DriveWithCubicJoystick extends Command{
 	private DriveTrain driveTrain;
 	private CubicJoystick controller;
 	
-	private static int movementArc = 4;
+	private static int movementArc = 3;
 	private static int rotationArc = 1;
 	
 	private static double movementMaxSpeed = 0.75;

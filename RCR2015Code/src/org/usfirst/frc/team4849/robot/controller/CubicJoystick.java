@@ -1,6 +1,9 @@
 package org.usfirst.frc.team4849.robot.controller;
 
+import org.usfirst.frc.team4849.robot.Robot;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CubicJoystick extends Joystick {
 	private double axisOutput;
@@ -20,7 +23,7 @@ public class CubicJoystick extends Joystick {
 		double output;
 		this.pow = pow;
 		
-		output = 1.0 * ((axisOutput - safezone) / (1 - safezone));
+		output = (axisOutput - safezone) / (1 - safezone);
 		output = Math.pow(axisOutput, this.pow);
 		output *= max;
 		
@@ -29,18 +32,22 @@ public class CubicJoystick extends Joystick {
 
 	// This function alters the Joystick input
 	public double getValue(AxisType axis, double pow, double max) {
-		axisOutput = this.getAxis(axis);
+		axisOutput = Robot.getController().getAxis(axis);
 		axisInverse = axisOutput * -1;
 		
-		if ((axisOutput < safezone) || (axisInverse < safezone)) return 0;
+		SmartDashboard.putNumber("Axis Output", axisOutput);
+		
+		if (Math.abs(axisOutput) < safezone) return 0;
 		
 		if (axisOutput > axisInverse) {
-			curveAxis(axisOutput, pow, max);
+			axisOutput = curveAxis(axisOutput, pow, max);
+			
 		}
 		else {
-			axisInverse = curveAxis(axisInverse, pow, max);
+			
+			axisInverse = curveAxis(axisOutput, pow, max);
 			axisOutput = axisInverse * -1;
-
+			
 			if (axisOutput > axisInverse) return axisInverse;
 			
 		}

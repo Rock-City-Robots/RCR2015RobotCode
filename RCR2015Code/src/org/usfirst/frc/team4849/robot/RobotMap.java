@@ -15,8 +15,11 @@ public class RobotMap {
 	public static final int WHEEL_LEFT_BACK = 2;
 	public static final int WHEEL_LEFT_FRONT = 3;
 	
-	public static final int ROLLER_RIGHT = 4;
-	public static final int ROLLER_LEFT = 5;
+	public static final int ROLLER_LEFT = 4;
+	public static final int ROLLER_RIGHT = 5;
+	
+	public static final int BELT_LEFT = 6;
+	public static final int BELT_RIGHT = 7;
 	
 	/*
 	 * DIGITAL I/O
@@ -37,12 +40,7 @@ public class RobotMap {
 	 * USB PORTS 
 	 */
 	public static final int CONTROLLER = 0;
-	
-	/*
-	 * CANS
-	 */
-	public static final int BELT_LEFT = 3;
-	public static final int BELT_RIGHT = 4;
+
 	
 	/*
 	 * LIGHTS

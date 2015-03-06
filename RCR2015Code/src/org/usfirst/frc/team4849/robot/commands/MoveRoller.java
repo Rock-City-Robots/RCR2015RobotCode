@@ -1,11 +1,7 @@
 package org.usfirst.frc.team4849.robot.commands;
 
-import org.usfirst.frc.team4849.robot.RobotMap;
 import org.usfirst.frc.team4849.robot.subsystems.Roller;
 
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveRoller extends Command {

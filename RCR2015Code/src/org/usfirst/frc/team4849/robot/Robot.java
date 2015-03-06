@@ -2,6 +2,7 @@ package org.usfirst.frc.team4849.robot;
 
 import org.usfirst.frc.team4849.robot.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team4849.robot.controller.Controller;
+import org.usfirst.frc.team4849.robot.controller.DualAction;
 import org.usfirst.frc.team4849.robot.controller.Extreme3D;
 import org.usfirst.frc.team4849.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
@@ -24,7 +25,7 @@ public class Robot extends IterativeRobot {
 	private Lifter lifter;
 	private Roller roller;
 	private static Light light;
-	private Controller controller;
+	private static Controller controller;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -32,7 +33,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		driveTrain = new DriveTrain();
-		//lifter = new Lifter();
+		lifter = new Lifter();
 		roller = new Roller();
 		light = new Light(this);
 		controller = new Extreme3D(this);
@@ -60,8 +61,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopPeriodic() {
-		//lifter.outputSwitchs();
-		//roller.outputDashboard();
+		lifter.outputSwitchs();
+		roller.outputDashboard();
 		Scheduler.getInstance().run();
 
 	}
@@ -82,6 +83,10 @@ public class Robot extends IterativeRobot {
 
 	public Roller getRoller() {
 		return roller;
+	}
+	
+	public static Controller getController() {
+		return controller;
 	}
 	
 	public static Light getLights() {

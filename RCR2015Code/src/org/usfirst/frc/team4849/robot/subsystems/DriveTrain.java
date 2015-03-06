@@ -23,7 +23,7 @@ public class DriveTrain extends Subsystem implements LightOutput{
 	private static Gyro gyro = new Gyro(RobotMap.GYRO);
 	
 	private static double gyroAngle;
-	private static double maxSpeed = 0.6;
+	private static double maxSpeed = 0.8;
 	private static double currentSpeed = 0.0;
 	
 	private static final double movementContribution = 0.8;
@@ -44,17 +44,30 @@ public class DriveTrain extends Subsystem implements LightOutput{
 		currentSpeed = ((Math.abs(x + y) / 2) * movementContribution) + (Math.abs(z) * rotationContribution);
 		gyroAngle = gyro.getAngle();
 		
-		switch (driveType) {
-			case ROBOT_ORIENTED: gyroAngle = 0.0;
-				break;
-			case FIELD_ORIENTED: gyroAngle %= 360;
-				break;
+		if(driveType == DriveType.ROBOT_ORIENTED) {
+			gyroAngle = 0;
+			
+			robotDrive.setInvertedMotor(MotorType.kFrontRight, false);
+			robotDrive.setInvertedMotor(MotorType.kRearRight, false);
+			
+			robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
+			robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
+		}
+		else if (driveType == DriveType.FIELD_ORIENTED) {
+			//gyroAngle += 180;
+			gyroAngle %= 360;
+			
+			robotDrive.setInvertedMotor(MotorType.kFrontRight, false);
+			robotDrive.setInvertedMotor(MotorType.kRearRight, false);
+			
+			robotDrive.setInvertedMotor(MotorType.kFrontLeft, true);
+			robotDrive.setInvertedMotor(MotorType.kRearLeft, true);
 		}
 		
 		SmartDashboard.putNumber("Gyro Value:", -gyroAngle);
 		SmartDashboard.putNumber("DriveTrain Speed:", currentSpeed);
 		
-		robotDrive.mecanumDrive_Cartesian(x, y, z, -gyroAngle);
+		robotDrive.mecanumDrive_Cartesian(-x, -y, -z, gyroAngle);
 	}
 	
 	public void resetGyro() {

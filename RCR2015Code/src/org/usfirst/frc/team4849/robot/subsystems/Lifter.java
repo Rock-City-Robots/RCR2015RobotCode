@@ -3,34 +3,30 @@ package org.usfirst.frc.team4849.robot.subsystems;
 import org.usfirst.frc.team4849.robot.RobotMap;
 import org.usfirst.frc.team4849.robot.commands.LifterState;
 
-import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lifter extends Subsystem implements LightOutput{
-	private static CANJaguar beltRight = new CANJaguar(RobotMap.BELT_RIGHT);
-	private static CANJaguar beltLeft = new CANJaguar(RobotMap.BELT_LEFT);
+	private static Jaguar beltRight = new Jaguar(RobotMap.BELT_RIGHT);
+	private static Jaguar beltLeft = new Jaguar(RobotMap.BELT_LEFT);
 	
 	private static DigitalInput switchRightBottom = new DigitalInput(RobotMap.SWITCH_RIGHT_BOTTOM);
 	private static DigitalInput switchRightTop = new DigitalInput(RobotMap.SWITCH_RIGHT_TOP);
 	private static DigitalInput switchLeftBottom = new DigitalInput(RobotMap.SWITCH_LEFT_BOTTOM);
 	private static DigitalInput switchLeftTop = new DigitalInput(RobotMap.SWITCH_LEFT_TOP);
 	
-	private static LifterState currentState = LifterState.BOTTOM;
+	private static LifterState currentState = LifterState.TOP;
 	
 	private static boolean beltLeftFinished = false;
 	private static boolean beltRightFinished = false;
 	
-	private static double beltSpeed = 0.25;
+	private static double beltSpeed = 0.3;
 	private static double currentSpeed = 0.0;
 	
 	public Lifter() {
-		beltRight.setPercentMode();
-		beltLeft.setPercentMode();
-		
-		beltRight.enableControl();
-		beltLeft.enableControl();
 		
 	}
 	
@@ -90,8 +86,18 @@ public class Lifter extends Subsystem implements LightOutput{
 		
 	}
 	
-	public void drive() {
-		
+	public void driveMode() {
+		if(currentState == LifterState.BOTTOM) {
+			beltRight.set(0.45);
+			beltLeft.set(0.45);
+			
+			Timer.delay(0.4);
+			
+			beltRight.set(0);
+			beltLeft.set(0);
+			
+			currentState = LifterState.DRIVE;
+		}
 	}
 	
 	public LifterState getCurrentState() {

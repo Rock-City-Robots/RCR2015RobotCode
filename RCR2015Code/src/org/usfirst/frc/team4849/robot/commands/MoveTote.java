@@ -3,6 +3,7 @@ package org.usfirst.frc.team4849.robot.commands;
 import org.usfirst.frc.team4849.robot.subsystems.Lifter;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveTote extends Command {
 	private LifterState targetState;
@@ -18,6 +19,9 @@ public class MoveTote extends Command {
 
 	@Override
 	protected void execute() {
+		
+		SmartDashboard.putString("Target Lift State", targetState.toString());
+		
 		if(targetState == LifterState.TOP && lifter.getCurrentState() != LifterState.TOP) {
 			lifter.toteUp();
 			finished = false;
@@ -27,6 +31,12 @@ public class MoveTote extends Command {
 		else if(targetState == LifterState.BOTTOM && lifter.getCurrentState() != LifterState.BOTTOM) {
 			lifter.toteDown();
 			finished = false;
+			
+		}
+		
+		else if(targetState == LifterState.DRIVE && lifter.getCurrentState() == LifterState.BOTTOM) {
+			lifter.driveMode();
+			finished = true;
 			
 		}
 		

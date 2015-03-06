@@ -6,6 +6,7 @@ import org.usfirst.frc.team4849.robot.Robot;
 import org.usfirst.frc.team4849.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public abstract class Controller {
@@ -24,6 +25,7 @@ public abstract class Controller {
 	 */
 	protected static int TOTE_UP;
 	protected static int TOTE_DOWN;
+	protected static int DRIVE_MODE;
 	
 	/*
 	 * Rollers
@@ -34,6 +36,10 @@ public abstract class Controller {
 	protected Controller(Robot robot) {
 		Controller.robot = robot;
 	
+	}
+	
+	protected double getAxis(AxisType axis) {
+		return Robot.getController().getController().getAxis(axis);
 	}
 	
 	protected abstract void bindKeys();

@@ -8,6 +8,8 @@ import org.usfirst.frc.team4849.robot.commands.ResetGyro;
 import org.usfirst.frc.team4849.robot.commands.RollerState;
 import org.usfirst.frc.team4849.robot.commands.ToggleDrivingMode;
 
+import edu.wpi.first.wpilibj.Joystick.AxisType;
+
 public class Extreme3D extends Controller {
 	
 	public Extreme3D(Robot robot) {
@@ -18,6 +20,7 @@ public class Extreme3D extends Controller {
 		
 		TOTE_UP = 6;
 		TOTE_DOWN = 4;
+		DRIVE_MODE = 2;
 		
 		TOTE_IN = 5;
 		TOTE_OUT = 3;
@@ -39,6 +42,7 @@ public class Extreme3D extends Controller {
 		 */
 		createButton(TOTE_UP).whenPressed(new MoveTote(getRobot().getLifter(), LifterState.TOP));
 		createButton(TOTE_DOWN).whenPressed(new MoveTote(getRobot().getLifter(), LifterState.BOTTOM));
+		createButton(DRIVE_MODE).whenPressed(new MoveTote(getRobot().getLifter(), LifterState.DRIVE));
 		
 		/*
 		 * Rollers
