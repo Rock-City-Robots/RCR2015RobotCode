@@ -10,7 +10,7 @@ public class AutonomousCommandGroup extends CommandGroup {
 	public AutonomousCommandGroup(Robot robot, boolean autoModeJumper){
 		SmartDashboard.putBoolean("AutoModeJumper", autoModeJumper);
 		if(autoModeJumper) {
-			addSequential(new DriveCommnad(robot.getDriveTrain(), 0, -0.7, 0, 1.5));
+			addSequential(new DriveCommnad(robot.getDriveTrain(), 0, -0.7, 0, 2.25));
 		}else{
 			//step 1: Lift tote
 			addSequential(new MoveTote(robot.getLifter(), LifterState.BOTTOM));

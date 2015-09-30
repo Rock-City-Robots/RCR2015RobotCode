@@ -23,7 +23,6 @@ public class DriveTrain extends Subsystem implements LightOutput{
 	private static Gyro gyro = new Gyro(RobotMap.GYRO);
 	
 	private static double gyroAngle;
-	private static double maxSpeed = 0.8;
 	private static double currentSpeed = 0.0;
 	
 	private static final double movementContribution = 0.8;
@@ -34,7 +33,7 @@ public class DriveTrain extends Subsystem implements LightOutput{
 		//TODO: do we really need this?
 		gyro.initGyro();
 		
-		robotDrive.setMaxOutput(maxSpeed);
+		robotDrive.setMaxOutput(RobotMap.MAX_SPEED);
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
 		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
 		

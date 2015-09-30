@@ -23,7 +23,7 @@ public class Lifter extends Subsystem implements LightOutput{
 	private static boolean beltLeftFinished = false;
 	private static boolean beltRightFinished = false;
 	
-	private static double beltSpeed = 0.3;
+	private static double beltSpeed = 0.2;
 	private static double currentSpeed = 0.0;
 	
 	public Lifter() {

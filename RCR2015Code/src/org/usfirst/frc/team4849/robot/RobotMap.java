@@ -42,4 +42,9 @@ public class RobotMap {
 	 * USB PORTS 
 	 */
 	public static final int CONTROLLER = 0;
+	
+	/*
+	 * USE THIS TO ADJUST DRIVE TRAIN POWER
+	 */
+	public static final double MAX_SPEED = .8;
 }
