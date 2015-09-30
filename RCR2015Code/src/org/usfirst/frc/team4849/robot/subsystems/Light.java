@@ -58,15 +58,15 @@ public class Light extends Subsystem {
 		return voltage * maxVoltage;
 	}
     
-    private double getGlobalVoltage() {
-    	double globalVoltage = 0;
-    	
-    	globalVoltage += robot.getDriveTrain().getLightOutput() * driveTrainContribution;
-    	globalVoltage += robot.getLifter().getLightOutput() * lifterContribution;
-    	globalVoltage += robot.getRoller().getLightOutput() * rollerContribution;
-    	
-    	return globalVoltage;
-    }
+	private double getGlobalVoltage() {
+	    double globalVoltage = 0;
+	    	
+	    globalVoltage += robot.getDriveTrain().getLightOutput() * driveTrainContribution;
+	    globalVoltage += robot.getLifter().getLightOutput() * lifterContribution;
+	    globalVoltage += robot.getRoller().getLightOutput() * rollerContribution;
+	    	
+	    return globalVoltage;
+	}
     
 	public void end() {
 		light.setVoltage(minVoltage);
